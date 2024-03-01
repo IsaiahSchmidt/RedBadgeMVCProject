@@ -1,0 +1,97 @@
+﻿Genre -> Album table
+- reference booktosubjects in BookWizard
+- have track genre inherit from album for simplicity (or remove from track entity altogether)
+- or just make it a string and have fewer genre-related functions
+	- could search similar to title
+
+Home page 
+- IsFeatured bool on albums (private, admin only). have page only display albums if(IsFeatured=true)
+- Manually make home page with albums of my choice
+	- My own reviews, "our picks" or something like that
+	- Link to album
+- Display top X amount by average score
+	- could get messy if too many have same score
+
+Check that onDelete action is properly set
+- cascade will delete FK objects as well, no action will just delete selected
+	- check every time you migrate, could reset to default
+	- Track / Artist Id
+	- in migration file and DbContext snapshot
+
+Users
+	- have user page w top rated albums and reviews (backlog)
+
+Reviews
+	home page (index) for album/track displays all albums/tracks
+	filter option to view by rating, artist
+
+Creating Albums
+	if issues, route to create tracks first, then create album and add tracks
+
+ReadMe
+
+												ToDo next: 
+													Copy/Paste methods from old proj
+													Finish endpoints for all
+													Views for all complete CRUD methods
+													Build out genre functionality
+
+EndPoints:
+Album							Todo:
+	CreateAlbum - done
+	GetAllAlbums - done
+	GetAlbumsByArtist - done
+	GetAlbumByTitle - done
+								GetAlbumsByRating
+								GetAlbumsByGenre
+Artist
+	CreateArtist - done
+								GetArtistAlbumsByRating
+								GetArtistTracksByRating
+Track
+	CreateTrack - done
+	GetAllTracks - done
+								GetTracksByRating 
+	GetTrackByTitle - done
+	GetTracksByArtist - done
+Review & TrackReview
+	CreateReview - done
+	GetUserReviews - done
+	GetReviewsByAlbum - done
+	GetReviewsByTrack - done
+	UpdateReview - done
+	DeleteReview - done
+User
+	CreateUser
+	DeleteUser
+
+YearReleased:
+	int (range(4,4,please enter a 4 digit year, ex: 2024))
+Will need to parse year Released from int or retrieve year only from DateTime (date.year)
+https://learn.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings
+DateTime date1 = new DateTime(1, 12, 1);
+DateTime date2 = new DateTime(2010, 1, 1);
+Console.WriteLine(date1.ToString("%y"));
+// Displays 1
+Console.WriteLine(date1.ToString("yy"));
+// Displays 01
+Console.WriteLine(date1.ToString("yyy"));
+// Displays 001
+Console.WriteLine(date1.ToString("yyyy"));
+// Displays 0001
+Console.WriteLine(date1.ToString("yyyyy"));
+// Displays 00001
+Console.WriteLine(date2.ToString("%y"));
+// Displays 10
+Console.WriteLine(date2.ToString("yy"));
+// Displays 10
+Console.WriteLine(date2.ToString("yyy"));
+// Displays 2010
+Console.WriteLine(date2.ToString("yyyy"));
+// Displays 2010
+Console.WriteLine(date2.ToString("yyyyy"));
+// Displays 02010
+
+
+
+change domain objects in view models to list items
