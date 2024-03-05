@@ -31,7 +31,7 @@ Creating Albums
 ReadMe
 
 												ToDo next: 
-													Copy/Paste methods from old proj
+													Copy/Paste methods from old proj - done
 													Finish endpoints for all
 													Views for all complete CRUD methods
 													Build out genre functionality
@@ -42,16 +42,16 @@ Album							Todo:
 	GetAllAlbums - done
 	GetAlbumsByArtist - done
 	GetAlbumByTitle - done
-								GetAlbumsByRating
-								GetAlbumsByGenre
+								GetAlbumsByRating - done
+								GetAlbumsByGenre - done
 Artist
 	CreateArtist - done
-								GetArtistAlbumsByRating
-								GetArtistTracksByRating
+								GetArtistAlbumsByRating - in Album
+								GetArtistTracksByRating - in Track
 Track
 	CreateTrack - done
 	GetAllTracks - done
-								GetTracksByRating 
+								GetTracksByRating - done
 	GetTrackByTitle - done
 	GetTracksByArtist - done
 Review & TrackReview
@@ -95,3 +95,4 @@ Console.WriteLine(date2.ToString("yyyyy"));
 
 
 change domain objects in view models to list items
+	- view models talk to view models, not domain objects

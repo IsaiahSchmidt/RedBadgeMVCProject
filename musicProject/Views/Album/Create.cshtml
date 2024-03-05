@@ -1,0 +1,23 @@
+﻿@model musicProject.Models.AlbumModels.AlbumCreate
+
+<div class="container">
+    <form method="post" asp-action="Create">
+        <div class="form-group">
+            <label for="Title">Title</label>
+            <input asp-for="Title" class="form-control" name="Title" placeholder="title" />
+        </div>
+        <div class="form-group">
+            <label for="ArtistId">Artist</label>
+            <input asp-for="@Model.ArtistId" type="number" class="form-control" name="ArtistId" placeholder="artist" />
+        </div>
+        <div class="form-group">
+            <label for="Genre">Genre</label>
+            <input type="text" class="form-control" name="Genre" placeholder="genre" />
+        </div>
+        <div class="form-group">
+            <label for="Released">Released</label>
+            <input type="date" class="form-control" name="Released" placeholder="2024" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-2">Create</button>
+    </form>
+</div>

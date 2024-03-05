@@ -1,0 +1,10 @@
+﻿@model IEnumerable<musicProject.Models.ArtistModels.ArtistListItem>
+
+<h1 class="text-center">All Artists</h1>
+<a asp-action="Create" asp-controller="Artist" class="text-primary">Create An Artist</a>
+<div>
+    @foreach (var artist in Model)
+    {
+        <p>@artist.Name</p>
+    }
+</div>

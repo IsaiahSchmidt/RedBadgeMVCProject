@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace musicProject.Models.TrackReviewModels
 {
-    internal class TrackReviewDetail
+    public class TrackReviewDetail
     {
         public int Id { get; set; }
         public TrackListItem Track { get; set; }
         public double Rating { get; set; }
         public string Content { get; set; } 
-        public string MLUserId { get; set; }
+        public string UserId { get; set; }
     }
 }

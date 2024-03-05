@@ -1,0 +1,14 @@
+﻿@model musicProject.Models.TrackModels.TrackCreate
+
+<h1>@Model.AlbumId</h1>
+
+<div class="container">
+    <form method="post" asp-action="Create">
+        <input asp-for="@Model.AlbumId" hidden />
+        <div class="form-group">
+            <label for="Title">Title</label>
+            <input asp-for="Title" class="form-control" name="Title" placeholder="title" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-2">Create</button>
+    </form>
+</div>

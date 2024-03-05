@@ -13,6 +13,6 @@ namespace musicProject.Models.TrackReviewModels
         public int TrackId { get; set; }
         public double Rating { get; set; }
         public string Content { get; set; }
-        public string MLUserId { get; set; }
+        public string UserId { get; set; }
     }
 }

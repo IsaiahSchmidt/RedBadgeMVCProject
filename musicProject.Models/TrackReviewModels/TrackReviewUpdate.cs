@@ -14,7 +14,7 @@ namespace musicProject.Models.TrackReviewModels
 
         [Required]
         [Range(1, 10, ErrorMessage = "Please input a value between 1 and 10.")]
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         [MaxLength(2000), MinLength(1)]
         public string Content { get; set; }

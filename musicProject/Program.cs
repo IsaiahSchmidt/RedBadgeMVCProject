@@ -3,6 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using musicProject.Data;
 using musicProject.Data.Data;
 using musicProject.Data.Entities;
+using musicProject.Services.AlbumReviewServices;
+using musicProject.Services.AlbumServices;
+using musicProject.Services.ArtistServices;
+using musicProject.Services.TrackReviewServices;
+using musicProject.Services.TrackServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +20,11 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
+builder.Services.AddScoped<IArtistService, ArtistService>();
+builder.Services.AddScoped<ITrackService, TrackService>();
+builder.Services.AddScoped<IAlbumReviewService, AlbumReviewService>();
+builder.Services.AddScoped<ITrackReviewService, TrackReviewService>();
 
 var app = builder.Build();
 

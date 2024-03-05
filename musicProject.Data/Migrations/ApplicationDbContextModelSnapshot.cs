@@ -260,7 +260,7 @@ namespace musicProject.Data.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.ToTable("Albums");
+                    b.ToTable("Albums", (string)null);
 
                     b.HasData(
                         new
@@ -288,7 +288,7 @@ namespace musicProject.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artists", (string)null);
 
                     b.HasData(
                         new
@@ -325,7 +325,7 @@ namespace musicProject.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BaseReviews");
+                    b.ToTable("BaseReviews", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("BaseReview");
 
@@ -363,7 +363,7 @@ namespace musicProject.Data.Migrations
 
                     b.HasIndex("ArtistId");
 
-                    b.ToTable("Tracks");
+                    b.ToTable("Tracks", (string)null);
 
                     b.HasData(
                         new
