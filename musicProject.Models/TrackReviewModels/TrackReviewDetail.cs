@@ -1,5 +1,6 @@
 ﻿using musicProject.Data.Entities;
 using musicProject.Models.TrackModels;
+using musicProject.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace musicProject.Models.TrackReviewModels
         public TrackListItem Track { get; set; }
         public double Rating { get; set; }
         public string Content { get; set; } 
-        public string UserId { get; set; }
+        public UserListItem User { get; set; }
     }
 }
+ 

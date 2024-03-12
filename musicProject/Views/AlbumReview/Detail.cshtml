@@ -1,0 +1,39 @@
+﻿@using System.Security.Claims
+@inject IHttpContextAccessor _contextAccessor; 
+@model musicProject.Models.AlbumReviewModels.AlbumReviewDetail
+
+@{
+    var claims = _contextAccessor.HttpContext!.User.Identity as ClaimsIdentity;
+    var claimId = claims.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+    if (claimId == null) { throw new Exception("Unable to verify user credentails."); }
+    string _userId;
+    _userId = claimId;
+}
+
+<form>
+    <input asp-for="@Model.Id" hidden />
+    <input asp-for="@Model.Album.Id" hidden />
+</form>
+
+<body>
+    <h3>Review Details</h3>
+    <h4>@Model.Album.Title</h4>
+    <h5>@Model.Album.Artist.Name</h5>
+    @* <p>Released: @Model.Album.Released.Year</p> *@
+    <hr />
+    <p>Score: @Model.Rating / 10</p>
+    <p>Comment: @Model.Content</p>
+    <p>By: @Model.User.UserName</p>
+</body>
+
+<div>
+    <a asp-controller="AlbumReview" asp-action="NewIndex">Back to List</a> 
+    @if (User.Identity.IsAuthenticated && Model.User.Id == _userId)
+    {
+        <span><strong>|</strong></span>
+        <a asp-controller="AlbumReview" asp-action="Update" asp-route-id="@Model.Id">Edit</a>
+        <span><strong>|</strong></span>
+        <a asp-controller = "AlbumReview" asp-action = "Delete" asp-route-id = "@Model.Id" > Delete </a>
+    }
+
+</div>

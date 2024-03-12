@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,6 +21,9 @@ namespace musicProject.Models.TrackReviewModels
 
         [MaxLength(2000), MinLength(1)]
         public string Content { get; set; } = string.Empty;
-        public string MLUserId { get; set; }
+        public string UserId { get; set; }
+
+        [ValidateNever]
+        public IEnumerable<SelectListItem> TrackSelection { get; set; }
     }
 }

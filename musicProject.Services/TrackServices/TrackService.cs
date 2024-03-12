@@ -38,6 +38,7 @@ namespace musicProject.Services.TrackServices
             List<TrackListItem> trackList = await _context.Tracks.Include(a => a.Artist).Include(a => a.Album)
                 .Select(entity => new TrackListItem
                 {
+                    Id = entity.Id,
                     Title = entity.Title,
                     Album = new AlbumListItem
                     {
@@ -51,7 +52,7 @@ namespace musicProject.Services.TrackServices
                             Id = entity.Artist.Id
                         }
                     }
-                }).ToListAsync();
+                }).OrderBy(t => t.Title).ToListAsync();
             return trackList;
         }
 
@@ -62,6 +63,7 @@ namespace musicProject.Services.TrackServices
             if (track == null) { return null; }
             return new TrackDetail
             {
+                Id = track.Id,
                 Title = track.Title,
                 Album = new AlbumListItem
                 {
@@ -74,6 +76,30 @@ namespace musicProject.Services.TrackServices
                         Name = track.Artist.Name,
                         Id = track.Artist.Id
                     }
+                }
+            };
+        }
+
+        public async Task<TrackDetail> GetTrackByIdAsync(int id)
+        {
+            var track = await _context.Tracks.Include(a => a.Album).Include(a => a.Artist)
+                .FirstOrDefaultAsync(entity => entity.Id == id);
+            if (track is null) return null;
+            return new TrackDetail
+            {
+                Id = track.Id,
+                Title = track.Title,
+                Album = new AlbumListItem
+                {
+                    Title = track.Album.Title,
+                    Id = track.Album.Id,
+                    Artist = new ArtistListItem
+                    {
+                        Name = track.Artist.Name,
+                        Id = track.Artist.Id
+                    },
+                    Genre = track.Album.Genre,
+                    Released = track.Album.Released,
                 }
             };
         }
@@ -101,6 +127,58 @@ namespace musicProject.Services.TrackServices
             return tracksByArtist;
         }
 
+        public async Task<IEnumerable<TrackListItem>> GetTracksByAvgRatingAsync()
+        {
+            List<TrackListItem> tracks = new List<TrackListItem>();
+
+            List<TrackListItem> tracksByRating = await _context.Tracks.Include(a => a.Album).Include(a => a.Artist)
+                .Select(entity => new TrackListItem
+                {
+                    Id = entity.Id,
+                    Title = entity.Title,
+                    Album = new AlbumListItem
+                    {
+                        Title = entity.Album.Title,
+                        Genre = entity.Album.Genre,
+                        Released = entity.Album.Released,
+                        Id = entity.Album.Id,
+                        Artist = new ArtistListItem
+                        {
+                            Name = entity.Artist.Name,
+                            Id = entity.Artist.Id
+                        }
+                    }
+                }).ToListAsync();
+            foreach (var track in tracksByRating)
+            {
+                List<TrackReview> reviews = _context.TrackReviews.Where(r => r.Track.Title == track.Title).ToList();
+                double avgRating = 0;
+                if (reviews.Count != 0)
+                    avgRating = Math.Round(reviews.Average(r => r.Rating), 2);
+
+                tracks.Add(new TrackListItem()
+                {
+                    Id = track.Id,
+                    Title = track.Title,
+                    Album = new AlbumListItem
+                    {
+                        Title = track.Album.Title,
+                        Genre = track.Album.Genre,
+                        Released = track.Album.Released,
+                        Id = track.Album.Id,
+                        Artist = new ArtistListItem
+                        {
+                            Name = track.Album.Artist.Name,
+                            Id = track.Album.Artist.Id
+                        },
+                    },
+                    Rating = avgRating
+                });
+            }
+
+            return tracks.OrderByDescending(r=>r.Rating);
+        }
+
         public async Task<IEnumerable<TrackListItem>> GetTracksByRatingAsync()
         {
             List<TrackListItem> trackListItems = await _context.Tracks.Include(a => a.Artist).Include(a => a.Album)
@@ -123,5 +201,7 @@ namespace musicProject.Services.TrackServices
 
             return trackListItems.OrderBy(review => review.Rating).ToList();
         }
+
+
     }
 }

@@ -10,6 +10,7 @@ namespace musicProject.Models.AlbumModels
 {
     public class AlbumDetail
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public ArtistListItem Artist { get; set; }
         public List<TrackListItem> Tracks { get; set; }

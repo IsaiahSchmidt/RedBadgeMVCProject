@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using musicProject.Data.Data;
 using musicProject.Data.Entities;
+using musicProject.Models.AlbumModels;
+using musicProject.Models.ArtistModels;
+using musicProject.Models.TrackModels;
 using musicProject.Models.TrackReviewModels;
+using musicProject.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,41 +54,79 @@ namespace musicProject.Services.TrackReviewServices
             return true;
         }
 
-        public async Task<IEnumerable<TrackReviewDetail>> GetReviewsByTrackAsync(string trackTitle)
+        public async Task<IEnumerable<TrackReviewListItem>> GetReviewsByTrackAsync(string trackTitle)
         {
             List<TrackReviewDetail> reviews = new List<TrackReviewDetail>();
             List<TrackReviewListItem> reviewsByTrack = await _context.TrackReviews
+                .Include(t => t.Track).Include(u => u.User)
                 .Where(r => r.Track.Title == trackTitle).Select(entity => new TrackReviewListItem
                 {
+                    Id = entity.Id,
                     Rating = entity.Rating,
-                    Content = entity.Content,
-                    TrackId = entity.TrackId,
+                    //Content = entity.Content,
+                    TrackTitle = entity.Track.Title,
+                    User = new UserListItem
+                    {
+                        Id = entity.User.Id,
+                        UserName = entity.User.UserName
+                    }
                 }).ToListAsync();
-            foreach (var review in reviewsByTrack)
-            {
-                TrackReviewDetail detail = new()
+            //foreach (var review in reviewsByTrack)
+            //{
+            //    TrackReviewDetail detail = new()
+            //    {
+            //        Rating = review.Rating,
+            //        Content = review.Content,
+            //        UserId = review.UserId
+            //    };
+            //    reviews.Add(detail);
+            //}
+            return reviewsByTrack;
+        }
+
+        public async Task<IEnumerable<TrackReviewListItem>> GetReviewsByTrackArtistAsync(string artistName)
+        {
+            //List<TrackReviewDetail> reviews = new List<TrackReviewDetail>();
+            List<TrackReviewListItem> reviewsByTrack = await _context.TrackReviews
+                .Include(t => t.Track).ThenInclude(a => a.Artist).Include(u => u.User)
+                .Where(r => r.Track.Artist.Name == artistName).Select(entity => new TrackReviewListItem
                 {
-                    Rating = review.Rating,
-                    Content = review.Content,
-                    UserId = review.UserId
-                };
-                reviews.Add(detail);
-            }
-            return reviews;
+                    Id = entity.Id,
+                    Rating = entity.Rating,
+                    //Content = entity.Content,
+                    TrackTitle = entity.Track.Title,
+                    User = new UserListItem
+                    {
+                        Id = entity.User.Id,
+                        UserName = entity.User.UserName
+                    }
+                }).ToListAsync();
+            //foreach (var review in reviewsByTrack)
+            //{
+            //    TrackReviewDetail detail = new()
+            //    {
+            //        Id= review.Id,
+            //        Rating = review.Rating,
+            //        Content = review.Content,
+            //        UserId = review.UserId
+            //    };
+            //    reviews.Add(detail);
+            //}
+            return reviewsByTrack;
         }
 
         public async Task<IEnumerable<TrackReviewListItem>> GetUserTrackReviewsAsync()
         {
             ProcessUserInfo();
             return await _context.TrackReviews
-                .Where(r => r.UserId == _userId)
+                .Where(r => r.UserId == _userId).Include(u => u.User)
+                .Include(t => t.Track).ThenInclude(a => a.Album)
                 .Select(n => new TrackReviewListItem
                 {
                     Id = n.Id,
-                    Content = n.Content,
                     Rating = n.Rating,
-                    TrackId = n.TrackId,
-                }).ToListAsync();
+                    TrackTitle = n.Track.Title
+                }).OrderByDescending(r => r.Rating).ToListAsync();
         }
 
         public async Task<bool> UpdateTrackReviewAsync(TrackReviewUpdate reviewUpdate)
@@ -92,6 +135,7 @@ namespace musicProject.Services.TrackReviewServices
             var review = await _context.TrackReviews.Where(r => r.UserId == _userId)
                 .FirstOrDefaultAsync(n => n.Id == reviewUpdate.Id);
             if (review is null) return false;
+            if (review.UserId != _userId) return false; /*exception: reference not set to instance of an object review.user.id*/
             review.Rating = reviewUpdate.Rating;
             review.Content = reviewUpdate.Content;
 
@@ -101,17 +145,130 @@ namespace musicProject.Services.TrackReviewServices
 
         public async Task<TrackReviewDetail> GetTrackReviewByIdAsync(int id)
         {
-            var review = await _context.TrackReviews.Where(r => r.UserId == _userId)
+            var review = await _context.TrackReviews
+                .Include(u => u.User).Include(t => t.Track).ThenInclude(a => a.Album).ThenInclude(a => a.Artist)
+                //.Where(r => r.UserId == _userId)
                 .FirstOrDefaultAsync(n => n.Id == id);
             if (review is null) return null;
             return new TrackReviewDetail()
             {
                 Id = review.Id,
-                UserId = review.UserId,
                 Rating = review.Rating,
-                Content = review.Content
+                Content = review.Content,
+                Track = new TrackListItem
+                {
+                    Id = review.Track.Id,
+                    Title = review.Track.Title,
+                    Album = new AlbumListItem
+                    {
+                        Id = review.Track.Album.Id,
+                        Artist = new ArtistListItem
+                        {
+                            Id = review.Track.Artist.Id,
+                            Name = review.Track.Artist.Name
+                        },
+                        Title = review.Track.Album.Title,
+                        Genre = review.Track.Album.Genre,
+                        Released = review.Track.Album.Released,
+                    },
+                },
+                User = new UserListItem
+                {
+                    Id = review.User.Id,
+                    UserName = review.User.UserName
+                }
             };
         }
+        public async Task<List<TrackReviewListItem>> GetAllTrackReviewsAsync()
+        {
+            List<TrackReviewListItem> trackReviews = await _context.TrackReviews
+                .Include(u => u.User).Include(t => t.Track)
+                .Select(entity => new TrackReviewListItem
+                {
+                    Id = entity.Id,
+                    Rating = entity.Rating,
+                    TrackTitle = entity.Track.Title,
+                    User = new UserListItem
+                    {
+                        Id = entity.User.Id,
+                        UserName = entity.User.UserName
+                    }
+                }).ToListAsync();
+            return trackReviews.OrderByDescending(r => r.Rating).ToList();
+        }
+
+        public async Task<TrackWithReviews> GetReviewsByTrackIdAsync(int trackId)
+        {
+            var trackWithReviews = await _context.Tracks
+                .Include(a=>a.Album).Include(a=>a.Artist)
+                .FirstOrDefaultAsync(t => t.Id == trackId);
+            if (trackWithReviews == null) return null;
+            return new TrackWithReviews()
+            {
+                Id = trackWithReviews.Id,
+                Title = trackWithReviews.Title,
+                Artist = new ArtistListItem
+                {
+                    Id = trackWithReviews.Artist.Id,
+                    Name = trackWithReviews.Artist.Name,
+                },
+                Album = new AlbumListItem
+                {
+                    Id = trackWithReviews.Album.Id,
+                    Title = trackWithReviews.Album.Title,
+                    Genre = trackWithReviews.Album.Genre,
+                    Released = trackWithReviews.Album.Released,
+                    Artist = new ArtistListItem
+                    {
+                        Id = trackWithReviews.Album.Artist.Id,
+                        Name = trackWithReviews.Album.Artist.Name,
+                    }
+                },
+                TrackReviews = await _context.TrackReviews.Include(u => u.User).Include(t=>t.Track)
+                .Where(t=>t.TrackId == trackId)
+                .Select(entity => new TrackReviewListItem
+                {
+                    Id = entity.Id,
+                    Rating = entity.Rating,
+                    User = new UserListItem
+                    {
+                        Id = entity.User.Id,
+                        UserName = entity.User.UserName,
+                    }
+                }).OrderByDescending(r => r.Rating).ToListAsync()
+            };
+        }
+
+        //TrackWithReviews trackReviews = await _context.Tracks.Where(t => t.Id == trackId)
+        //    .Include(t => t.Album).Include(a => a.Artist).Select(entity => new TrackWithReviews
+        //    {
+        //        Id = entity.Id,
+        //        Title = entity.Title,
+        //        Album = new AlbumListItem
+        //        {
+        //            Id = entity.Album.Id,
+        //            Title = entity.Album.Title,
+        //            Artist = new ArtistListItem
+        //            {
+        //                Id = entity.Artist.Id,
+        //                Name = entity.Artist.Name,
+        //            },
+        //            Genre = entity.Album.Genre,
+        //            Released = entity.Album.Released,
+        //        },
+        //        TrackReviews = _context.TrackReviews.Where(r => r.TrackId == trackId).Select(review => new TrackReviewListItem
+        //        {
+        //            Id = review.Id,
+        //            Rating = review.Rating,
+        //            User = new UserListItem
+        //            {
+        //                Id = review.User.Id,
+        //                UserName = review.User.UserName
+        //            }
+        //        }).OrderByDescending(r=>r.Rating).ToList()
+        //    })
+
+        //return trackReviews;
 
 
         private void ProcessUserInfo()
@@ -121,5 +278,6 @@ namespace musicProject.Services.TrackReviewServices
             if (claimId == null) { throw new Exception("Unable to verify user credentails."); }
             _userId = claimId;
         }
+
     }
 }

@@ -1,0 +1,14 @@
+﻿@model musicProject.Models.TrackModels.TrackDetail
+<form>
+    <input asp-for="@Model.Id" hidden />
+</form>
+
+<h1>@Model.Title</h1>
+<h2>@Model.Album.Artist.Name</h2>
+<h3>@Model.Album.Title</h3>
+<body>
+    <p>Genre: @Model.Album.Genre</p>
+    <p>Released: @Model.Album.Released.Year</p>
+
+    <a asp-action="Index" asp-controller="Track">Back To Index</a>
+</body>

@@ -64,6 +64,7 @@ namespace musicProject.Services.AlbumServices
             if (album == null) { return null; }
             return new AlbumDetail
             {
+                Id = album.Id,
                 Title = album.Title,
                 Artist = new ArtistListItem
                 {
@@ -86,6 +87,7 @@ namespace musicProject.Services.AlbumServices
                 .Where(a => a.Artist.Name == artistName).Include(a => a.Tracks).Include(a => a.Artist)
                 .Select(entity => new AlbumListItem
                 {
+                    Id =entity.Id,
                     Title = entity.Title,
                     Artist = new ArtistListItem
                     {
@@ -98,12 +100,54 @@ namespace musicProject.Services.AlbumServices
             return albumsByArtist;
         }
 
+        public async Task<IEnumerable<AlbumListItem>> GetAlbumsByAvgRatingAsync()
+        {
+            List<AlbumListItem> albums = new List<AlbumListItem>();
+
+            List<AlbumListItem> albumsByRating = await _context.Albums.Include(a => a.Artist)
+                .Select(entity => new AlbumListItem
+                {
+                    Id = entity.Id,
+                    Title = entity.Title,
+                    Genre = entity.Genre,
+                    Released = entity.Released,
+                    Artist = new ArtistListItem
+                    {
+                        Id = entity.Artist.Id,
+                        Name = entity.Artist.Name,
+                    }
+                }).ToListAsync();
+            foreach (var album in albumsByRating)
+            {
+                List<AlbumReview> reviews = _context.AlbumReviews.Where(r=>r.Album.Title == album.Title).ToList();
+                double avgRating = 0;
+                if(reviews.Count != 0)
+                    avgRating = Math.Round(reviews.Average(r => r.Rating), 2);
+
+                albums.Add(new AlbumListItem()
+                {
+                    Id = album.Id,
+                    Title = album.Title,
+                    Genre = album.Genre,
+                    Released = album.Released,
+                    Artist = new ArtistListItem
+                    {
+                        Id = album.Artist.Id,
+                        Name = album.Artist.Name,
+                    },
+                    Rating = avgRating
+                });
+            }
+            return albums.OrderByDescending(r=>r.Rating);
+        }
+
         public async Task<IEnumerable<AlbumListItem>> GetAlbumsByGenreAsync(string genre)
         {
             List<AlbumListItem> albumsByGenre = await _context.Albums
                 .Where(g => g.Genre == genre).Include(a => a.Tracks).Include(a => a.Artist)
                 .Select(entity => new AlbumListItem
                 {
+                    Id = entity.Id,
                     Title = entity.Title,
                     Artist = new ArtistListItem
                     {
@@ -121,6 +165,7 @@ namespace musicProject.Services.AlbumServices
             List<AlbumListItem> albumListItems = await _context.Albums.Include(a => a.Artist)
                 .Select(entity => new AlbumListItem
                 {
+                    Id = entity.Id,
                     Title = entity.Title,
                     Artist = new ArtistListItem
                     {
@@ -138,6 +183,7 @@ namespace musicProject.Services.AlbumServices
             List<AlbumListItem> albumList = await _context.Albums.Include(a => a.Tracks).Include(a => a.Artist)
                 .Select(entity => new AlbumListItem
                 {
+                    Id = entity.Id,
                     Title = entity.Title,
                     Artist = new ArtistListItem
                     {

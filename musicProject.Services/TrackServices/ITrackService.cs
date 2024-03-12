@@ -14,5 +14,7 @@ namespace musicProject.Services.TrackServices
         Task<List<TrackListItem>> GetAllTracksAsync();
         Task<IEnumerable<TrackListItem>> GetTracksByArtistAsync(string artistName);
         Task<IEnumerable<TrackListItem>> GetTracksByRatingAsync();
+        Task<TrackDetail> GetTrackByIdAsync(int id);
+        Task<IEnumerable<TrackListItem>> GetTracksByAvgRatingAsync();
     }
 }

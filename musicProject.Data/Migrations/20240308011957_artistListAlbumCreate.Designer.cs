@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using musicProject.Data.Data;
 
@@ -11,9 +12,11 @@ using musicProject.Data.Data;
 namespace musicProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240308011957_artistListAlbumCreate")]
+    partial class artistListAlbumCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,7 +271,7 @@ namespace musicProject.Data.Migrations
                             Id = 1,
                             ArtistId = 1,
                             Genre = "rock",
-                            Released = new DateTime(2024, 3, 11, 20, 7, 46, 665, DateTimeKind.Local).AddTicks(3665),
+                            Released = new DateTime(2024, 3, 7, 20, 19, 57, 166, DateTimeKind.Local).AddTicks(3315),
                             Title = "TESTAlbum"
                         });
                 });
@@ -371,7 +374,7 @@ namespace musicProject.Data.Migrations
                             Id = 1,
                             AlbumId = 1,
                             ArtistId = 1,
-                            Released = new DateTime(2024, 3, 11, 20, 7, 46, 665, DateTimeKind.Local).AddTicks(3719),
+                            Released = new DateTime(2024, 3, 7, 20, 19, 57, 166, DateTimeKind.Local).AddTicks(3374),
                             Title = "testTitle",
                             TrackNumber = 1
                         },
@@ -380,7 +383,7 @@ namespace musicProject.Data.Migrations
                             Id = 2,
                             AlbumId = 1,
                             ArtistId = 1,
-                            Released = new DateTime(2024, 3, 11, 20, 7, 46, 665, DateTimeKind.Local).AddTicks(3722),
+                            Released = new DateTime(2024, 3, 7, 20, 19, 57, 166, DateTimeKind.Local).AddTicks(3378),
                             Title = "testTitle2",
                             TrackNumber = 2
                         });

@@ -1,0 +1,19 @@
+﻿@model musicProject.Models.AlbumModels.AlbumDetail
+<form>
+    <input asp-for="@Model.Id" hidden />
+</form>
+
+<h1>@Model.Title</h1>
+<h2>@Model.Artist.Name</h2>
+<body>
+    <h4>Details</h4>
+    <p>@Model.Genre</p>
+    <p>@Model.Released.Year</p>
+    <ol>
+        @foreach (var track in Model.Tracks)
+        {
+            <li>@track.Title</li>
+        }
+    </ol>
+    <a asp-action="Index" asp-controller="Album">Back To Index</a>
+</body>

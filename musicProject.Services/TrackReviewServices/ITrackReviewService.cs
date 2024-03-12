@@ -1,4 +1,5 @@
-﻿using musicProject.Models.TrackReviewModels;
+﻿using musicProject.Models.TrackModels;
+using musicProject.Models.TrackReviewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,12 @@ namespace musicProject.Services.TrackReviewServices
         Task<bool> CreateTrackReviewAsync(TrackReviewCreate reviewCreate);
         Task<bool> UpdateTrackReviewAsync(TrackReviewUpdate reviewUpdate);
         Task<IEnumerable<TrackReviewListItem>> GetUserTrackReviewsAsync();
-        Task<IEnumerable<TrackReviewDetail>> GetReviewsByTrackAsync(string trackTitle);
+        Task<IEnumerable<TrackReviewListItem>> GetReviewsByTrackAsync(string trackTitle);
+        Task<IEnumerable<TrackReviewListItem>> GetReviewsByTrackArtistAsync(string artistName);
         Task<bool> DeleteTrackReviewAsync(int id);
         Task<TrackReviewDetail> GetTrackReviewByIdAsync(int id);
+        Task<List<TrackReviewListItem>> GetAllTrackReviewsAsync();
+        Task<TrackWithReviews> GetReviewsByTrackIdAsync(int trackId);
+
     }
 }

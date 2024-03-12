@@ -23,12 +23,13 @@ namespace musicProject.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Detail(string title)
+        public async Task<IActionResult> Detail(int id)
         {
-            var track = await _trackService.GetTrackAsync(title);
+            var track = await _trackService.GetTrackByIdAsync(id);
             if (track == null) { return BadRequest(); }
             return View(track);
         }
+
         [HttpGet]
         public async Task<IActionResult> TrackByArtist(string artistName)
         {
@@ -45,6 +46,8 @@ namespace musicProject.Controllers
             //make 404 if time
             TrackCreate trackCreate = new TrackCreate();
             trackCreate.AlbumId = albumId;
+            trackCreate.ArtistId = album.Artist.Id;
+            trackCreate.Released = album.Released;
             return View(trackCreate);
         }
 
@@ -54,7 +57,10 @@ namespace musicProject.Controllers
         {
             if (await _trackService.CreateTrackAsync(model))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Track", new {model.AlbumId});
+                //will probably need changed w creating thru album
+                //redirect to create again if AddAnotherTrack, return AlbumDetail if Done
+
             }
             return View(model);
         }

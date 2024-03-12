@@ -16,5 +16,6 @@ namespace musicProject.Services.AlbumServices
         Task<IEnumerable<AlbumListItem>> GetAlbumsByRatingAsync();
         Task<IEnumerable<AlbumListItem>> GetAlbumsByGenreAsync(string genre);
         Task<AlbumDetail> GetAlbumByIdAsync(int albumId);
+        Task<IEnumerable<AlbumListItem>> GetAlbumsByAvgRatingAsync();
     }
 }

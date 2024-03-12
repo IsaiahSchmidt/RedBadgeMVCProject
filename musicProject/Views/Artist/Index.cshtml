@@ -2,9 +2,11 @@
 
 <h1 class="text-center">All Artists</h1>
 <a asp-action="Create" asp-controller="Artist" class="text-primary">Create An Artist</a>
+<hr />
 <div>
     @foreach (var artist in Model)
     {
-        <p>@artist.Name</p>
+        <h5><a asp-action="Detail" asp-controller="Artist" asp-route-name="@artist.Name">@artist.Name</a></h5>
+        <br />
     }
 </div>

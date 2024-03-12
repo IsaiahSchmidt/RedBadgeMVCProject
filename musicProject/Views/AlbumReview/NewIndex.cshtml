@@ -1,27 +1,28 @@
 ﻿@model IEnumerable<musicProject.Models.AlbumModels.AlbumListItem>
 
-<h1 class="text-center">All Albums</h1>
-<a asp-action="Create" asp-controller="Album" class="text-primary">Create An Album</a>
+<h1>Album Reviews</h1>
+
+<a asp-action="Create" asp-controller="AlbumReview" class="text-primary">Review An Album</a> |
+<a asp-action="MyAlbumReviews" asp-controller="AlbumReview" class="text-primary">My Album Reviews</a>
 <input class="form-control" type="text" id="albumTitle" onkeyup="searchForAlbums()" placeholder="Search for Albums..">
 
-<table id="albums" class="table table-striped table-dark">
+ <table id="albumsWithReviews" class="table table-striped table-dark">
     <thead>
         <tr>
-            <th>Title </th>
-            <th>Artist</th>
-            <th>Genre</th>
-            <th>Released</th>
+            <th>Album </th>
+            <th>Artist </th>
+            <th>Rating</th>
+            <th>All Reviews</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var album in Model)
         {
             <tr>
-                @* <td><a asp-action="DetailByName" asp-route-name="@album.Title">@album.Title</a></td> *@
-                <td><a asp-action="Detail" asp-route-id="@album.Id">@album.Title</a></td>
-                <td><a asp-action="Detail" asp-controller="Artist" asp-route-name="@album.Artist.Name">@album.Artist.Name</a></td>
-                <td>@album.Genre</td>
-                <td>@album.Released.Year</td>
+                <td>@album.Title</td>
+                <td>@album.Artist.Name</td>
+                <td>@album.Rating</td>
+                <td><a asp-controller="AlbumReview" asp-action="ReviewsByAlbum" asp-route-id="@album.Id">Reviews</a> </td>
             </tr>
         }
     </tbody>
@@ -32,12 +33,12 @@
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("albumTitle");
         filter = input.value.toUpperCase();
-        table = document.getElementById("albums");
+        table = document.getElementById("albumsWithReviews");
         tr = table.getElementsByTagName("tr");
 
         // Loop through all table rows, and hide those that don't match the search query
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[0]; 
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

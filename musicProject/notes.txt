@@ -1,4 +1,15 @@
-﻿Genre -> Album table
+﻿
+Before turning in:
+	breakpoint methods to check if used or not
+		comment out unused and put in unused section to keeo for potential use in the future
+
+	clean up comments
+		delete bad code, keep useful stuff
+
+
+
+
+Genre -> Album table
 - reference booktosubjects in BookWizard
 - have track genre inherit from album for simplicity (or remove from track entity altogether)
 - or just make it a string and have fewer genre-related functions
@@ -24,34 +35,122 @@ Users
 Reviews
 	home page (index) for album/track displays all albums/tracks
 	filter option to view by rating, artist
+	MyReviews page - user reviews
+Or
+	home page returns all by avg rating
+	click artist for all reviews for artist
+		tracks in track reviews, albums in album reviews
+	details shows each individual rating
 
-Creating Albums
-	if issues, route to create tracks first, then create album and add tracks
+Tracks
+	add TrackList int to entity
+	orderby(tracklist) to display in correct order
+	currently you have to enter them in the correct order
+
+Tables
+	ability to click header to filter by that row
 
 ReadMe
 
+Ask Mr Brown
+
+	delete album review issues
+		405 error this page isnt working rn
+			supposed to route to NewIndex
+		not hitting breakpoint on delete post method
+		only got it to work once, then it quit in db context at options=> connection string
+			tried:
+				adding usesql to db context - stopped there on one walk thru
+				adding asp-actions to delete button
+
+
 												ToDo next: 
-													Copy/Paste methods from old proj - done
-													Finish endpoints for all
-													Views for all complete CRUD methods
+													Finish endpoints for all - gtg
+
+													Change album review to match track review - gtg
+
+													Get albums by genre
+
+													Search bar
+
+													Views
+														make them look nice
+														home page
+															custom reviews? or move headers to their own section on page
+
+													CSS for all
+														mvp, enough to meet min. criterea to start
+
+													Update methods for album, track, artist
+														- high error possibility creating, best to have some ability to fix
+														- strech goal, set to only be modified by me
+
+														------
 													Build out genre functionality
+														not making own entity, good as is (for mvp)
+
+Other Views / Paths
+	Create album from artist detail page - stretch
+	Link album and track to page of reviews for it
+	Click genre to get lists of track by genre ?
+		or select genre from list like create album, get all for that genre
+	Back to index from artist page - done
+		add back to artist button
+	Track detail
+		- uneccessary, all info is already presented in table
+	Link Albums in artist detail to DetailByName (detail + track list)
+	Custom error pages
+		
+
+Views:
+Album								ToDo:
+	Create - done
+	Detail - done
+	Index - done
+									ByGenre - research search bar
+									ByArtist
+Artist
+	Create - done
+	Detail - done
+	Index - done
+Track
+	Create - done
+	Detail
+	Index - done	
+	ByArtist
+AlbumReview
+	Create - done
+	Detail - done
+	Index - done
+	ByRating - done (index)
+	ByUser - done
+	Update - done
+	Delete - done
+TrackReview	
+	Create - done 
+	Detail - done
+	Index - done
+	ByRating - done (index)
+	ByUser - done
+	Update - done
+	Delete - done
 
 EndPoints:
-Album							Todo:
+Album				
 	CreateAlbum - done
 	GetAllAlbums - done
 	GetAlbumsByArtist - done
 	GetAlbumByTitle - done
-								GetAlbumsByRating - done
-								GetAlbumsByGenre - done
+	GetAlbumsByRating - done
+	GetAlbumsByGenre - done
 Artist
 	CreateArtist - done
-								GetArtistAlbumsByRating - in Album
-								GetArtistTracksByRating - in Track
+	GetArtistAlbumsByRating - done
+	GetArtistTracksByRating - done
 Track
 	CreateTrack - done
 	GetAllTracks - done
-								GetTracksByRating - done
+	GetTracksByRating - done
 	GetTrackByTitle - done
 	GetTracksByArtist - done
 Review & TrackReview
@@ -64,6 +163,32 @@ Review & TrackReview
 User
 	CreateUser
 	DeleteUser
+
+Reviews
+	have Rate button on album/track detail and index display
+		- similar to Buy in genstoreMVC
+		- may or may not do reviews index page (like ablum page)
+			- could make this GetByRating display
+
+AddTracksToAlbum
+	call create track from album method, add more tracks to selected album
+
+create album
+-options Create, or Add Tracks
+	Add Tracks redirects to track create w album info preset
+	-options for each track: Done, Add Another to album
+	Done redirects to page w all info for album, including track list
+	Add Another creates a new track with all album info preset
+Or create album w/o tracks, create tracks w/o album, have seperate method to add tracks to album
+
+Track create 400 error  
+	route requires albumId, creating new track will not have that 
+
+400 albumdetail view error
+	ensure id (or whatever value is being searched by) is assigned in the service method
+
+change domain objects in view models to list items
+	- view models talk to view models, not domain objects
 
 YearReleased:
 	int (range(4,4,please enter a 4 digit year, ex: 2024))
@@ -93,6 +218,3 @@ Console.WriteLine(date2.ToString("yyyyy"));
 // Displays 02010
 
 
-
-change domain objects in view models to list items
-	- view models talk to view models, not domain objects

@@ -1,14 +1,17 @@
 ﻿@model musicProject.Models.TrackModels.TrackCreate
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <h1>@Model.AlbumId</h1>
 
 <div class="container">
     <form method="post" asp-action="Create">
         <input asp-for="@Model.AlbumId" hidden />
+        <input asp-for="@Model.ArtistId" hidden />
         <div class="form-group">
             <label for="Title">Title</label>
             <input asp-for="Title" class="form-control" name="Title" placeholder="title" />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block mt-2">Create</button>
+        </div>        
+        <button type="submit" class="btn btn-primary btn-block mt-2">Add Track To Album</button>
+        <a type="submit" class="btn btn-primary btn-block mt-2" asp-controller="Album" asp-action="Detail" asp-route-id="@Model.AlbumId">Done</a>
     </form>
 </div>
