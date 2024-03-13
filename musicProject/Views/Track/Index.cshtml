@@ -2,16 +2,31 @@
 
 <h1 class="text-center">All Tracks</h1>
 @* <a asp-action="Create" asp-controller="Track" class="text-primary">Create A Track</a> *@
-<input class="form-control" type="text" id="trackTitle" onkeyup="searchForTracks()" placeholder="Search for Tracks..">
+@* <input class="form-control" type="text" id="trackTitle" onkeyup="searchForTracks()" placeholder="Search for Tracks.."> *@
 
 <table id="tracks" class="table table-striped table-dark">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Album</th>
-            <th>Genre</th>
-            <th>Released</th>
+            <th>
+                Title
+                <input class="form-control" type="text" id="trackTitle" onkeyup="searchForTracks()" placeholder="Search for Tracks..">
+            </th>
+            <th>
+                Artist
+                <input class="form-control" type="text" id="trackArtist" onkeyup="searchForArtists()" placeholder="Search for Artists..">
+            </th>
+            <th>
+                Album
+                <input class="form-control" type="text" id="trackAlbum" onkeyup="searchForAlbums()" placeholder="Search for Albums..">
+                </th>
+            <th>
+                Genre
+                <input class="form-control" type="text" id="trackGenre" onkeyup="searchForGenres()" placeholder="Search for Genres..">
+            </th>
+            <th>
+                Released
+                <input class="form-control" type="number" id="trackReleased" onkeyup="searchForReleased()" placeholder="Search for Release Date..">
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -40,7 +55,87 @@
 
         // Loop through all table rows, and hide those that don't match the search query
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[0]; //[0] specifies which data column it looks at
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function searchForArtists() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("trackArtist");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tracks");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function searchForAlbums() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("trackAlbum");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tracks");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }    
+    
+    function searchForGenres() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("trackGenre");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tracks");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }    
+    
+    function searchForReleased() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("trackReleased");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tracks");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[4];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -52,3 +147,68 @@
         }
     }
 </script>
+
+@* <script>
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#tracks thead tr')
+            .clone(true)
+            .addClass('filters')
+            .appendTo('#tracks thead');
+
+        var table = $('#tracks').DataTable({
+            orderCellsTop: true,
+            fixedHeader: true,
+            initComplete: function () {
+                var api = this.api();
+
+                // For each column
+                api
+                    .columns()
+                    .eq(0)
+                    .each(function (colIdx) {
+                        // Set the header cell to contain the input element
+                        var cell = $('.filters th').eq(
+                            $(api.column(colIdx).header()).index()
+                        );
+                        var title = $(cell).text();
+                        $(cell).html('<input type="text" placeholder="' + title + '" />');
+
+                        // On every keypress in this input
+                        $(
+                            'input',
+                            $('.filters th').eq($(api.column(colIdx).header()).index())
+                        )
+                            .off('keyup change')
+                            .on('change', function (e) {
+                                // Get the search value
+                                $(this).attr('title', $(this).val());
+                                var regexr = '({search})'; //$(this).parents('th').find('select').val();
+
+                                var cursorPosition = this.selectionStart;
+                                // Search the column for that value
+                                api
+                                    .column(colIdx)
+                                    .search(
+                                        this.value != ''
+                                            ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                            : '',
+                                        this.value != '',
+                                        this.value == ''
+                                    )
+                                    .draw();
+                            })
+                            .on('keyup', function (e) {
+                                e.stopPropagation();
+
+                                $(this).trigger('change');
+                                $(this)
+                                    .focus()[0]
+                                    .setSelectionRange(cursorPosition, cursorPosition);
+                            });
+                    });
+            },
+        });
+    });
+</script>
+ *@
