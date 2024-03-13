@@ -2,15 +2,27 @@
 
 <h1 class="text-center">All Albums</h1>
 <a asp-action="Create" asp-controller="Album" class="text-primary">Create An Album</a>
-<input class="form-control" type="text" id="albumTitle" onkeyup="searchForAlbums()" placeholder="Search for Albums..">
+@* <input class="form-control" type="text" id="albumTitle" onkeyup="searchForAlbums()" placeholder="Search for Albums.."> *@
 
 <table id="albums" class="table table-striped table-dark">
     <thead>
         <tr>
-            <th>Title </th>
-            <th>Artist</th>
-            <th>Genre</th>
-            <th>Released</th>
+            <th>
+                Title
+                <input class="form-control" type="text" id="albumTitle" onkeyup="searchForAlbums()" placeholder="Search for Albums..">
+            </th>
+            <th>
+                Artist
+                <input class="form-control" type="text" id="albumArtist" onkeyup="searchForArtists()" placeholder="Search for Artists..">
+            </th>
+            <th>
+                Genre
+                <input class="form-control" type="text" id="albumGenre" onkeyup="searchForGenres()" placeholder="Search for Genres..">
+            </th>
+            <th>
+                Released
+                <input class="form-control" type="number" id="albumReleased" onkeyup="searchForReleased()" placeholder="Search for Release Date..">
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -37,7 +49,67 @@
 
         // Loop through all table rows, and hide those that don't match the search query
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].getElementsByTagName("td")[0]; //[0] specifies which data column it looks at
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function searchForArtists() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("albumArtist");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("albums");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function searchForGenres() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("albumGenre");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("albums");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function searchForReleased() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("albumReleased");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("albums");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
