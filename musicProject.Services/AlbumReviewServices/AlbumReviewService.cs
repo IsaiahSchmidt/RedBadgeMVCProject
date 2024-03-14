@@ -39,8 +39,9 @@ namespace musicProject.Services.AlbumReviewServices
             await _context.AlbumReviews.AddAsync(review);
             await _context.SaveChangesAsync();
             return true;
-
         }
+
+
 
         public async Task<bool> DeleteAlbumReviewAsync(int id)
         {
@@ -63,7 +64,8 @@ namespace musicProject.Services.AlbumReviewServices
                     Id = n.Id,
                     //Content = n.Content,
                     Rating = n.Rating,
-                    AlbumTitle = n.Album.Title,
+                    AlbumTitle = n.Album.Title,           
+                    AlbumId = n.Album.Id,
                     User = new UserListItem()
                     {
                         Id = n.User.Id,

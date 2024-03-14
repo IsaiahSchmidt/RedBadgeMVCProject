@@ -28,7 +28,7 @@ namespace musicProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             ArtistCreate artistCreate = new ArtistCreate();
             return View(artistCreate);

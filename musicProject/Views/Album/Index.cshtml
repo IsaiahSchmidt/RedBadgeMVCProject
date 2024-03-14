@@ -23,6 +23,10 @@
                 Released
                 <input class="form-control" type="number" id="albumReleased" onkeyup="searchForReleased()" placeholder="Search for Release Date..">
             </th>
+@*             <th>
+                @* Review *@
+@*                 &nbsp;  
+            </th> *@ 
         </tr>
     </thead>
     <tbody>
@@ -34,7 +38,8 @@
                 <td><a asp-action="Detail" asp-controller="Artist" asp-route-name="@album.Artist.Name">@album.Artist.Name</a></td>
                 <td>@album.Genre</td>
                 <td>@album.Released.Year</td>
-            </tr>
+@*                 <td><a asp-action="Review" asp-controller="AlbumReview" asp-route-id="@album.Id">Review</a></td>
+ *@            </tr>
         }
     </tbody>
 </table>

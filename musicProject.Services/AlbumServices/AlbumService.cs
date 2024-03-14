@@ -41,6 +41,7 @@ namespace musicProject.Services.AlbumServices
             if (album == null) { return null; }
             return new AlbumDetail
             {
+                Id = album.Id,
                 Title = album.Title,
                 Artist = new ArtistListItem
                 {
@@ -141,25 +142,6 @@ namespace musicProject.Services.AlbumServices
             return albums.OrderByDescending(r=>r.Rating);
         }
 
-        public async Task<IEnumerable<AlbumListItem>> GetAlbumsByGenreAsync(string genre)
-        {
-            List<AlbumListItem> albumsByGenre = await _context.Albums
-                .Where(g => g.Genre == genre).Include(a => a.Tracks).Include(a => a.Artist)
-                .Select(entity => new AlbumListItem
-                {
-                    Id = entity.Id,
-                    Title = entity.Title,
-                    Artist = new ArtistListItem
-                    {
-                        Id = entity.Artist.Id,
-                        Name = entity.Artist.Name,
-                    },
-                    Released = entity.Released,
-                    Genre = entity.Genre
-                }).ToListAsync();
-            return albumsByGenre;
-        }
-
         public async Task<IEnumerable<AlbumListItem>> GetAlbumsByRatingAsync()
         {
             List<AlbumListItem> albumListItems = await _context.Albums.Include(a => a.Artist)
@@ -195,5 +177,27 @@ namespace musicProject.Services.AlbumServices
                 }).ToListAsync();
             return albumList;
         }
+
+
+        // Unused Methods (save for potential future use)
+
+        //public async Task<IEnumerable<AlbumListItem>> GetAlbumsByGenreAsync(string genre)
+        //{
+        //    List<AlbumListItem> albumsByGenre = await _context.Albums
+        //        .Where(g => g.Genre == genre).Include(a => a.Tracks).Include(a => a.Artist)
+        //        .Select(entity => new AlbumListItem
+        //        {
+        //            Id = entity.Id,
+        //            Title = entity.Title,
+        //            Artist = new ArtistListItem
+        //            {
+        //                Id = entity.Artist.Id,
+        //                Name = entity.Artist.Name,
+        //            },
+        //            Released = entity.Released,
+        //            Genre = entity.Genre
+        //        }).ToListAsync();
+        //    return albumsByGenre;
+        //}
     }
 }

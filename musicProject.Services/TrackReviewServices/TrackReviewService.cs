@@ -125,6 +125,7 @@ namespace musicProject.Services.TrackReviewServices
                 {
                     Id = n.Id,
                     Rating = n.Rating,
+                    TrackId = n.Track.Id,
                     TrackTitle = n.Track.Title
                 }).OrderByDescending(r => r.Rating).ToListAsync();
         }

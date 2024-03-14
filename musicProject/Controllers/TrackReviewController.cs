@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using musicProject.Data.Entities;
+using musicProject.Models.AlbumReviewModels;
 using musicProject.Models.TrackReviewModels;
 using musicProject.Services.TrackReviewServices;
 using musicProject.Services.TrackServices;
@@ -50,10 +51,29 @@ namespace musicProject.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Review(int id)
+        {
+            var track = await _trackService.GetTrackByIdAsync(id);
+            if (track == null) return BadRequest("Could not find track");
+            TrackReviewCreate trackReview = new TrackReviewCreate();
+            trackReview.TrackId = id;
+            return View(trackReview);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Review(TrackReviewCreate trackReviewCreate)
+        {
+            if (await _trackReviewService.CreateTrackReviewAsync(trackReviewCreate))
+                return RedirectToAction("NewIndex");
+            return View(trackReviewCreate);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             var review = await _trackReviewService.GetTrackReviewByIdAsync(id);
-            if (review == null) return BadRequest();
+            if (review == null) return BadRequest("Could not find track review");
             return View(review);
         }
 
@@ -61,23 +81,15 @@ namespace musicProject.Controllers
         public async Task<IActionResult> ReviewsByTrack(int id)
         {
             var reviews = await _trackReviewService.GetReviewsByTrackIdAsync(id);
-            if (reviews == null) return BadRequest();
+            if (reviews == null) return BadRequest("Could not find track");
             return View(reviews);
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> ReviewsByTrack(string title)
-        //{
-        //    var reviews = await _trackReviewService.GetReviewsByTrackAsync(title);
-        //    if (reviews == null) return BadRequest();
-        //    return View(reviews);
-        //}        
         
         [HttpGet]
         public async Task<IActionResult> ReviewsByTrackArtist(string name)
         {
             var reviews = await _trackReviewService.GetReviewsByTrackArtistAsync(name);
-            if (reviews == null) return BadRequest();
+            if (reviews == null) return BadRequest("Could not find track reviews");
             return View(reviews);
         }
 
@@ -118,7 +130,6 @@ namespace musicProject.Controllers
         {
             var review = await _trackReviewService.GetTrackReviewByIdAsync(id);
             if (review == null) return NotFound();
-            //if (review.User.Id != _userId) return BadRequest("You cannot delete someone else's review");
             return View(review);
         }
 
@@ -127,7 +138,17 @@ namespace musicProject.Controllers
         public async Task<IActionResult> DeleteReview(int id)
         {
             if (await _trackReviewService.DeleteTrackReviewAsync(id)) return RedirectToAction("MyTrackReviews");
-            return StatusCode(500, "Internal server error :( ");
+            return StatusCode(500, "Something went wrong. Please try again later");
         }
+
+        // Unused methods
+
+        //[HttpGet]
+        //public async Task<IActionResult> ReviewsByTrack(string title)
+        //{
+        //    var reviews = await _trackReviewService.GetReviewsByTrackAsync(title);
+        //    if (reviews == null) return BadRequest();
+        //    return View(reviews);
+        //}        
     }
 }

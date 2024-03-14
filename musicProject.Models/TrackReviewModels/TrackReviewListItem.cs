@@ -11,6 +11,7 @@ namespace musicProject.Models.TrackReviewModels
     public class TrackReviewListItem
     {
         public int Id { get; set; }
+        public int TrackId { get; set; }
         public string TrackTitle { get; set; }
         public double Rating { get; set; }
         public UserListItem User { get; set; }

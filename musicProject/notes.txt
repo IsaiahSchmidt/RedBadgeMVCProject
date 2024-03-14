@@ -2,18 +2,11 @@
 Before turning in:
 	breakpoint methods to check if used or not
 		comment out unused and put in unused section to keeo for potential use in the future
+	or comment out and build
 
 	clean up comments
 		delete bad code, keep useful stuff
 
-
-
-
-Genre -> Album table
-- reference booktosubjects in BookWizard
-- have track genre inherit from album for simplicity (or remove from track entity altogether)
-- or just make it a string and have fewer genre-related functions
-	- could search similar to title
 
 Home page 
 - IsFeatured bool on albums (private, admin only). have page only display albums if(IsFeatured=true)
@@ -32,25 +25,11 @@ Check that onDelete action is properly set
 Users
 	- have user page w top rated albums and reviews (backlog)
 
-Reviews
-	home page (index) for album/track displays all albums/tracks
-	filter option to view by rating, artist
-	MyReviews page - user reviews
-Or
-	home page returns all by avg rating
-	click artist for all reviews for artist
-		tracks in track reviews, albums in album reviews
-	details shows each individual rating
-
 Tracks
 	add TrackList int to entity
 	orderby(tracklist) to display in correct order
 	currently you have to enter them in the correct order
 
-Tables
-	ability to click header to filter by that row
-
-ReadMe
 
 Ask Mr Brown
 
@@ -65,6 +44,34 @@ Ask Mr Brown
 
 
 												ToDo next: 
+													Add Review tab to album table - done
+														link to create review w album info populated
+
+													Views
+														make them look nice
+														home page
+															custom reviews? or move headers to their own section on page
+
+													Add specific error messages on BadRequest, etc
+
+													CSS for all
+														mvp, enough to meet min. criterea to start
+
+													Add more data to DB
+														at least 5 users w reviews
+														
+													ReadMe
+														github
+
+													Album tracks reviews
+														album detail with all tracks and thier avg rating
+														could just add Album to trackwreviews and use search bar
+
+													Reroute to edit if trying to review an album you already reviewd ? - stretch
+
+
+													Fix routes on Back To Index - done
+
 													Finish endpoints for all - gtg
 
 													Change album review to match track review - gtg
@@ -72,14 +79,6 @@ Ask Mr Brown
 													Get albums by genre - done
 
 													Search bar - done
-
-													Views
-														make them look nice
-														home page
-															custom reviews? or move headers to their own section on page
-
-													CSS for all
-														mvp, enough to meet min. criterea to start
 
 													Update methods for album, track, artist
 														- high error possibility creating, best to have some ability to fix
@@ -91,14 +90,9 @@ Ask Mr Brown
 
 Other Views / Paths
 	Create album from artist detail page - stretch
+
 	Link album and track to page of reviews for it
-	Click genre to get lists of track by genre ?
-		or select genre from list like create album, get all for that genre
-	Back to index from artist page - done
-		add back to artist button
-	Track detail
-		- uneccessary, all info is already presented in table
-	Link Albums in artist detail to DetailByName (detail + track list)
+
 	Custom error pages
 		
 
@@ -107,8 +101,8 @@ Album								ToDo:
 	Create - done
 	Detail - done
 	Index - done
-									ByGenre - research search bar
-									ByArtist
+	ByGenre - done - search bar
+	ByArtist - done - search bar
 Artist
 	Create - done
 	Detail - done
@@ -167,11 +161,8 @@ User
 Reviews
 	have Rate button on album/track detail and index display
 		- similar to Buy in genstoreMVC
-		- may or may not do reviews index page (like ablum page)
+		- may or may not do reviews index page (like album page)
 			- could make this GetByRating display
-
-AddTracksToAlbum
-	call create track from album method, add more tracks to selected album
 
 create album
 -options Create, or Add Tracks
@@ -180,9 +171,6 @@ create album
 	Done redirects to page w all info for album, including track list
 	Add Another creates a new track with all album info preset
 Or create album w/o tracks, create tracks w/o album, have seperate method to add tracks to album
-
-Track create 400 error  
-	route requires albumId, creating new track will not have that 
 
 400 albumdetail view error
 	ensure id (or whatever value is being searched by) is assigned in the service method

@@ -14,8 +14,10 @@ namespace musicProject.Services.AlbumServices
         Task<List<AlbumListItem>> GetAllAlbumsAsync();
         Task<IEnumerable<AlbumListItem>> GetAlbumsByArtistAsync(string artistName);
         Task<IEnumerable<AlbumListItem>> GetAlbumsByRatingAsync();
-        Task<IEnumerable<AlbumListItem>> GetAlbumsByGenreAsync(string genre);
         Task<AlbumDetail> GetAlbumByIdAsync(int albumId);
         Task<IEnumerable<AlbumListItem>> GetAlbumsByAvgRatingAsync();
+
+        // Unused Methods (save for later)
+        //Task<IEnumerable<AlbumListItem>> GetAlbumsByGenreAsync(string genre);
     }
 }

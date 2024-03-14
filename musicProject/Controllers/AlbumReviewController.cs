@@ -44,10 +44,29 @@ namespace musicProject.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Review(int id)
+        {
+            var album = await _albumService.GetAlbumByIdAsync(id);
+            if (album == null) return BadRequest("Could not find album");
+            AlbumReviewCreate albumReview = new AlbumReviewCreate(); 
+            albumReview.AlbumId = id;
+            return View(albumReview);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Review(AlbumReviewCreate albumReviewCreate)
+        {
+            if (await _albumReviewService.CreateAlbumReviewAsync(albumReviewCreate))
+                return RedirectToAction("NewIndex");
+            return View(albumReviewCreate);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             var review = await _albumReviewService.GetAlbumReviewByIdAsync(id);
-            if (review == null) return BadRequest();
+            if (review == null) return BadRequest("Could not find album review");
             return View(review);
         }
 
@@ -55,23 +74,15 @@ namespace musicProject.Controllers
         public async Task<IActionResult> ReviewsByAlbum(int id)
         {
             var reviews = await _albumReviewService.GetReviewsByAlbumIdAsync(id);
-            if(reviews == null) return BadRequest();
+            if (reviews == null) return BadRequest("Could not find album");
             return View(reviews);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> ReviewsByAlbum(string title)
-        //{
-        //    var reviews = await _albumReviewService.GetAlbumReviewsByAlbumAsync(title);
-        //    if (reviews == null) return BadRequest();
-        //    return View(reviews);
-        //}        
-        
         [HttpGet]
         public async Task<IActionResult> ReviewsByArtist(string name)
         {
             var reviews = await _albumReviewService.GetAlbumReviewsByArtistAsync(name);
-            if (reviews == null) return BadRequest();
+            if (reviews == null) return BadRequest("Could not find album reviews");
             return View(reviews);
         }
 
@@ -79,7 +90,7 @@ namespace musicProject.Controllers
         public async Task<IActionResult> MyAlbumReviews()
         {
             var reviews = await _albumReviewService.GetUserAlbumReviewsAsync();
-            if (reviews is null) return BadRequest();
+            if (reviews is null) return BadRequest("You have not reviews any albums");
             return View(reviews);
         }
 
@@ -122,5 +133,15 @@ namespace musicProject.Controllers
             if (await _albumReviewService.DeleteAlbumReviewAsync(id)) return RedirectToAction("MyAlbumReviews");
             return StatusCode(500, "Something went wrong. Please try again later");
         }
+
+        // Unused methods
+
+        //[HttpGet]
+        //public async Task<IActionResult> ReviewsByAlbum(string title)
+        //{
+        //    var reviews = await _albumReviewService.GetAlbumReviewsByAlbumAsync(title);
+        //    if (reviews == null) return BadRequest();
+        //    return View(reviews);
+        //}        
     }
 }

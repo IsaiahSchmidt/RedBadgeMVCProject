@@ -43,7 +43,6 @@ namespace musicProject.Controllers
         {
             var album = await _albumService.GetAlbumByIdAsync(albumId);
             if (album == null) return BadRequest();
-            //make 404 if time
             TrackCreate trackCreate = new TrackCreate();
             trackCreate.AlbumId = albumId;
             trackCreate.ArtistId = album.Artist.Id;
@@ -58,9 +57,6 @@ namespace musicProject.Controllers
             if (await _trackService.CreateTrackAsync(model))
             {
                 return RedirectToAction("Create", "Track", new {model.AlbumId});
-                //will probably need changed w creating thru album
-                //redirect to create again if AddAnotherTrack, return AlbumDetail if Done
-
             }
             return View(model);
         }

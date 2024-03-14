@@ -110,6 +110,7 @@ namespace musicProject.Services.TrackServices
                 .Where(a => a.Artist.Name == artistName).Include(a => a.Artist).Include(a => a.Album)
                 .Select(entity => new TrackListItem
                 {
+                    Id = entity.Id,
                     Title = entity.Title,
                     Album = new AlbumListItem
                     {
@@ -176,7 +177,7 @@ namespace musicProject.Services.TrackServices
                 });
             }
 
-            return tracks.OrderByDescending(r=>r.Rating);
+            return tracks.OrderByDescending(r => r.Rating);
         }
 
         public async Task<IEnumerable<TrackListItem>> GetTracksByRatingAsync()
@@ -184,6 +185,7 @@ namespace musicProject.Services.TrackServices
             List<TrackListItem> trackListItems = await _context.Tracks.Include(a => a.Artist).Include(a => a.Album)
                     .Select(entity => new TrackListItem
                     {
+                        Id = entity.Id,
                         Title = entity.Title,
                         Album = new AlbumListItem
                         {

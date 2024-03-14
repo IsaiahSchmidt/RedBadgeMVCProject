@@ -13,6 +13,7 @@
             <th>Artist </th>
             <th>Rating</th>
             <th>All Reviews</th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
                 <td>@track.Album.Artist.Name</td>
                 <td>@track.Rating</td>
                 <td><a asp-controller="TrackReview" asp-action="ReviewsByTrack" asp-route-id="@track.Id">Reviews</a> </td>
+                <td><a asp-controller="TrackReview" asp-action="Review" asp-route-id="@track.Id">Create Review</a> </td>
             </tr>
         }
     </tbody>

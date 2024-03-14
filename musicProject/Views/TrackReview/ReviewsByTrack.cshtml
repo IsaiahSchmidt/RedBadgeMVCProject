@@ -6,8 +6,6 @@
 
 <h1><i>@Model.Title</i> Reviews</h1>
 
-@* possibly add review this track, route fills in trackId on create track review *@
-
 <table class="table table-striped table-dark">
     <thead>
         <tr>
@@ -29,4 +27,5 @@
 </table>
 
 <hr />
+<a asp-controller="TrackReview" asp-action="Review" asp-route-id="@Model.Id">Review This Track</a> |
 <a asp-action="NewIndex" asp-controller="TrackReview">Back To List</a>

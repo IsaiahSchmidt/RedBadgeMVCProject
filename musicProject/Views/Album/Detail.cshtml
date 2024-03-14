@@ -14,5 +14,7 @@
             <li>@track.Title</li>
         }
     </ol>
-    <a asp-action="Index" asp-controller="Album">Back To Index</a>
+    <a asp-action="Index" asp-controller="Album">Back To Albums</a> |
+    <a asp-action="Index" asp-controller="Artist">Back To Artists</a> |
+    <a asp-action="Detail" asp-controller="Artist" asp-route-name="@Model.Artist.Name">Back to <i>@Model.Artist.Name</i> Detail</a>
 </body>
