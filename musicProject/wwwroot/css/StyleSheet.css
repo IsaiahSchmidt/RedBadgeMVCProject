@@ -12,21 +12,20 @@ footer {
     bottom: 0;
     height: 48px;
     margin: 0 auto;
-/*    background: linear-gradient(to bottom, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
-*/    font-size: 18px;
+    font-size: 18px;
     color: black;
     background-color: rgb(175, 196, 222);
+    padding-top: 10px;
 }
 
 
 #navBar {
     background: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
-    font-size: 1.2em;
+    font-size: 1.25em;
     font: bold;
-    border-bottom: inset 3px purple;
 }
 
-#mlLogo{
+#mlLogo {
     height: 50px;
     width: 50px;
     margin: 3px;
@@ -38,7 +37,6 @@ h1 {
 }
 
 table {
-    /*background-color: azure;*/
     background: linear-gradient(99.6deg, rgb(112, 128, 152) 10.6%, rgb(242, 227, 234) 32.9%, rgb(234, 202, 213) 52.7%, rgb(220, 227, 239) 72.8%, rgb(185, 205, 227) 81.1%, rgb(154, 180, 212) 102.4%);
     border: 5px inset purple;
     border-collapse: collapse;
@@ -48,10 +46,6 @@ table {
     font-size: 1.25em;
     font-weight: 500;
     color: black;
-}
-
-tbody {
-    /*background: linear-gradient(to top, #f6f3ff 0%, #cd9cf2 100%);*/
 }
 
 td {
@@ -64,16 +58,15 @@ th {
     border: solid 2px black;
 }
 
-img{
-    margin: 10px;
-    width: 120px;
-    height: 120px;
+img {
+    margin: 15px;
+    width: 250px;
+    height: 250px;
 }
 
-.clear{
+.clear {
     width: 100%;
-    height: 300px;
-
+    height: 500px;
 }
 
 /* Home page */
@@ -81,10 +74,19 @@ img{
     font-size: 56px;
 }
 
-#homePageRow1{
+#welcometext {
+    font-size: 28px;
+}
+
+#welcometext1 {
+    font-size: 24px;
+}
+
+#homePageRow1 {
     min-width: 100%;
     margin-bottom: 5px;
     position: relative;
+    font-size: 1.25em;
 }
 
 #homePageRow2 {
@@ -92,12 +94,13 @@ img{
     margin-top: 5px;
     margin-bottom: 5px;
     position: relative;
+    font-size: 1.25em;
 }
 
 #homePage1 {
     width: 50%;
-    /*    height: 50%;
-*/ float: left;
+    height: 50%;
+    float: left;
     border: solid 1px purple;
     border-collapse: collapse;
     display: block;
@@ -105,8 +108,8 @@ img{
 
 #homePage2 {
     width: 50%;
-    /*    height: 50%;
-*/ float: right;
+    height: 50%;
+    float: right;
     border: solid 1px purple;
     border-collapse: collapse;
     display: block;
@@ -114,8 +117,8 @@ img{
 
 #homePage3 {
     width: 50%;
-    /*    height: 50%;
-*/ float: left;
+    height: 50%;
+    float: left;
     border: solid 1px purple;
     border-collapse: collapse;
     display: block;
@@ -123,15 +126,15 @@ img{
 
 #homePage4 {
     width: 50%;
-    /*    height: 50%;
-*/ float: right;
+    height: 50%;
+    float: right;
     border: solid 1px purple;
     border-collapse: collapse;
     display: block;
 }
 
 
-
+/* Detail views*/
 #detail {
     padding: .5em;
     margin: 1em;
@@ -153,12 +156,12 @@ img{
     font-weight: 500;
 }
 
-#reviewTitle{
-    font-size:1.5em;
+#reviewTitle {
+    font-size: 1.5em;
 }
 
-#reviewArtist{
-    font-size:1.25em;
+#reviewArtist {
+    font-size: 1.25em;
 }
 
 #actions {
@@ -205,6 +208,12 @@ img{
     border: inset 5px mediumpurple;
 }
 
+    #reviewButton:hover {
+        background-color: mediumpurple;
+        color: black;
+        border: inset 5px #f29957;
+    }
+
 #trackButton {
     border: inset 2px mediumpurple;
     background-color: #f29957;
@@ -219,9 +228,10 @@ img{
     padding: .25em;
 }
 
-#saveButton{
+#saveButton {
     margin: 0.5em 0 0 0;
 }
+
 /*  <script> function search bars*/
 #trackTitle {
     color: black;
@@ -271,9 +281,10 @@ img{
 #albumTitleR {
     color: black;
     border: inset 5px purple;
-    border-collapse:collapse;
+    border-collapse: collapse;
     margin: .25em 0 .01em 0;
 }
+
 #trackTitleR {
     color: black;
     border: inset 5px purple;

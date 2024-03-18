@@ -6,12 +6,13 @@
 <body>
     <div class="text-center">
         <h1 id="WelcomePageH1">MusicLovers</h1>
-        <p>Welcome all music lovers! This is your hub for all things music! Share your thoughts on albums and tracks with others, and discover what others have to say about your favorite music. </p>
+        <p id="welcometext">Welcome all music lovers! This is your hub for all things music! </p>
+        <p id="welcometext1">Share your thoughts on albums and tracks with others, and discover what others have to say about your favorite music. </p>
     </div>
     <div id="homePageRow1" class="container">
         <a asp-action="Index" asp-controller="Artist">
             <div class="text-center" id="homePage1">
-                <img src="./Images/Tame-Impala.jpg" alt="could not load image" />
+                <img src="./Images/lonerism.jpg" alt="could not load image" />
                 <p>Check out your favorite artist's discography here</p>
             </div>
         </a>
@@ -25,19 +26,20 @@
     <div id="homePageRow2" class="container">
         <a asp-action="NewIndex" asp-controller="AlbumReview">
             <div class="text-center" id="homePage3">
-                <img src="./Images/psychedelicguitar.jpg" alt="could not load image" />
+                <img src="./Images/death-grips-the-powers-that-b-2-cd.jpg" alt="could not load image" />
                 <p>Review your favorite albums here</p>
             </div>
         </a>
         <a asp-action="NewIndex" asp-controller="TrackReview">
             <div class="text-center" id="homePage4">
-                <img src="./Images/drums.jpg" alt="could not load image" />
+                <img src="./Images/graduationCover.jpg" alt="could not load image" />
                 <p>Review your favorite tracks here</p>
             </div>
         </a>
     </div>
+    <br />
     <div class="clear"></div>
-
+    <br />
 </body>
 
 </html>

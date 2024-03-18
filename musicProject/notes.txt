@@ -105,9 +105,9 @@ Artist
 	Index - done
 Track
 	Create - done
-	Detail
+	Detail - no need
 	Index - done	
-	ByArtist
+	ByArtist - search bar
 AlbumReview
 	Create - done
 	Detail - done
