@@ -193,6 +193,16 @@ img {
     color: black;
     border: inset 5px mediumpurple;
 }
+#createInputButton {
+    color: black;
+    border: inset 5px mediumpurple;
+    background-color: #f29957;
+}
+    #createInputButton:hover {
+        color: black;
+        border: inset 5px #f29957;
+        background-color: mediumpurple;
+    }
 
 #createButton {
     background-color: #f29957;
@@ -201,6 +211,21 @@ img {
     border: inset 2px mediumpurple;
     color: black;
 }
+
+#createArtistButton {
+    background-color: #f29957;
+    margin-top: 1em;
+    position: relative;
+    border: inset 5px mediumpurple;
+    color: black;
+}
+    #createArtistButton:hover {
+        background-color: mediumpurple;
+        margin-top: 1em;
+        position: relative;
+        border: inset 5px #f29957;
+        color: black;
+    }
 
 #reviewButton {
     background-color: #f29957;
@@ -219,6 +244,11 @@ img {
     background-color: #f29957;
     color: black;
 }
+    #trackButton:hover {
+        border: inset 2px #f29957;
+        background-color: mediumpurple;
+        color: black;
+    }
 
 #albumCreateButton {
     border: inset 2px mediumpurple;
@@ -227,6 +257,13 @@ img {
     color: black;
     padding: .25em;
 }
+    #albumCreateButton:hover {
+        border: inset 2px #f29957;
+        border-collapse: collapse;
+        background-color: mediumpurple;
+        color: black;
+        padding: .25em;
+    }
 
 #saveButton {
     margin: 0.5em 0 0 0;
