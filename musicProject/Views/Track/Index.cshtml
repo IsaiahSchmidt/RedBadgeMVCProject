@@ -1,10 +1,8 @@
 ﻿@model IEnumerable<musicProject.Models.TrackModels.TrackListItem>
 
 <h1 class="text-center">All Tracks</h1>
-@* <a asp-action="Create" asp-controller="Track" class="text-primary">Create A Track</a> *@
-@* <input class="form-control" type="text" id="trackTitle" onkeyup="searchForTracks()" placeholder="Search for Tracks.."> *@
 
-<table id="tracks" class="table table-striped table-dark">
+<table id="tracks">
     <thead>
         <tr>
             <th>
@@ -34,10 +32,8 @@
         {
             <tr>
                 <td>@track.Title</td>
-                @* <td>@track.Album.Artist.Name</td> *@
-                <td><a asp-action="Detail" asp-controller="Artist" asp-route-name="@track.Album.Artist.Name">@track.Album.Artist.Name</a></td>
-                @* <td>@track.Album.Title</td> *@
-                <td><a asp-action="Detail" asp-controller="Album" asp-route-id="@track.Album.Id">@track.Album.Title</a></td>
+                <td>@track.Album.Artist.Name - <a asp-action="Detail" asp-controller="Artist" asp-route-name="@track.Album.Artist.Name">Details</a></td>
+                <td>@track.Album.Title - <a asp-action="Detail" asp-controller="Album" asp-route-id="@track.Album.Id">Details</a></td>
                 <td>@track.Album.Genre</td>
                 <td>@track.Album.Released.Year</td>
             </tr>

@@ -4,9 +4,13 @@
     <input asp-for="@Model.Id" hidden />
 </form>
 
-<h1><i>@Model.Title</i> Reviews</h1>
-
-<table class="table table-striped table-dark">
+<div class="text-center">
+    <h1><i>@Model.Title</i> Reviews</h1>
+    <a asp-controller="AlbumReview" asp-action="Review" asp-route-id="@Model.Id">Review This Album</a> |
+    <a asp-action="NewIndex" asp-controller="AlbumReview">Back To List</a>
+</div>
+<br />
+<table>
     <thead>
         <tr>
             <th>Rating</th>
@@ -25,7 +29,3 @@
         }
     </tbody>
 </table>
-
-<hr />
-<a asp-controller="AlbumReview" asp-action="Review" asp-route-id="@Model.Id">Review This Album</a> |
-<a asp-action="NewIndex" asp-controller="AlbumReview">Back To List</a>

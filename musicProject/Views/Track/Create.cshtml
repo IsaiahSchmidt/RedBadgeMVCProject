@@ -3,15 +3,15 @@
 
 <h3>Add Tracks To Album</h3>
 
-<div class="container">
+<div id="create" class="container">
     <form method="post" asp-action="Create">
         <input asp-for="@Model.AlbumId" hidden />
         <input asp-for="@Model.ArtistId" hidden />
         <div class="form-group">
             <label for="Title">Title</label>
-            <input asp-for="Title" class="form-control" name="Title" placeholder="title" />
+            <input id="createInput" asp-for="Title" class="form-control" name="Title" placeholder="title" />
         </div>        
-        <button type="submit" class="btn btn-primary btn-block mt-2">Add Track To Album</button>
-        <a type="submit" class="btn btn-primary btn-block mt-2" asp-controller="Album" asp-action="Detail" asp-route-id="@Model.AlbumId">Done</a>
+        <button id="trackButton" type="submit" class="btn btn-primary btn-block mt-2">Add Track To Album</button>
+        <a id="trackButton" type="submit" class="btn btn-primary btn-block mt-2" asp-controller="Album" asp-action="Detail" asp-route-id="@Model.AlbumId">Done</a>
     </form>
 </div>

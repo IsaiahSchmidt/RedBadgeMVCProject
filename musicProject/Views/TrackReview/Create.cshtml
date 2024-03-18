@@ -4,22 +4,21 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="container">
+<div id="create" class="container">
     <form method="post" asp-action="Create">
         <input asp-for="@Model.UserId" hidden />
         <div class="form-group">
             <label for="TrackId">Track</label>
-            @* <input asp-for="@Model.TrackId" class="form-control" name="TrackId" placeholder="Track ID" /> *@
-            <select asp-for="TrackId" asp-items="ViewBag.TrackId" class="form-select"></select>
+            <select id="createInput" asp-for="TrackId" asp-items="ViewBag.TrackId" class="form-select"></select>
         </div>
         <div class="form-group">
             <label for="Rating">Rating</label>
-            <input asp-for="Rating" type="number" class="form-control" name="Rating" placeholder="1-10" />
+            <input id="createInput" asp-for="Rating" type="number" class="form-control" name="Rating" placeholder="1-10" />
         </div>
         <div class="form-group">
             <label for="Content">Content</label>
-            <input type="text" class="form-control" name="Content" placeholder="your thoughts..." />
+            <input id="createInput" type="text" class="form-control" name="Content" placeholder="your thoughts..." />
         </div>
-        <button type="submit" class="btn btn-primary btn-block mt-2">Create</button>
+        <button id="reviewButton" type="submit" class="btn btn-primary btn-block mt-2">Create</button>
     </form>
 </div>

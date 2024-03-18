@@ -1,11 +1,9 @@
 ﻿
 Before turning in:
 	breakpoint methods to check if used or not
-		comment out unused and put in unused section to keeo for potential use in the future
+		comment out unused and put in unused section to keep for potential use in the future
 	or comment out and build
 
-	clean up comments
-		delete bad code, keep useful stuff
 
 
 Home page 
@@ -30,6 +28,8 @@ Tracks
 	orderby(tracklist) to display in correct order
 	currently you have to enter them in the correct order
 
+Link CSS in _Layout page
+
 
 Ask Mr Brown
 
@@ -44,24 +44,20 @@ Ask Mr Brown
 
 
 												ToDo next: 
-													Add Review tab to album table - done
-														link to create review w album info populated
 
 													Views
-														make them look nice
-														home page
-															custom reviews? or move headers to their own section on page
-
-													Add specific error messages on BadRequest, etc
-
-													CSS for all
-														mvp, enough to meet min. criterea to start
+														limit # of items per page ? - stretch
 
 													Add more data to DB
 														at least 5 users w reviews
 														
 													ReadMe
 														github
+
+
+
+													Add Review tab to album table - done
+														link to create review w album info populated
 
 													Album tracks reviews
 														album detail with all tracks and thier avg rating
@@ -154,15 +150,8 @@ Review & TrackReview
 	GetReviewsByTrack - done
 	UpdateReview - done
 	DeleteReview - done
-User
-	CreateUser
-	DeleteUser
 
-Reviews
-	have Rate button on album/track detail and index display
-		- similar to Buy in genstoreMVC
-		- may or may not do reviews index page (like album page)
-			- could make this GetByRating display
+
 
 create album
 -options Create, or Add Tracks

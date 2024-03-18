@@ -4,25 +4,24 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="container">
+<div id="create" class="container">
     <form method="post" asp-action="Create">
         <div class="form-group">
             <label for="Title">Title</label>
-            <input asp-for="Title" class="form-control" name="Title" placeholder="title" />
+            <input id="createInput" asp-for="Title" class="form-control" name="Title" placeholder="title" />
         </div>
         <div class="form-group">
             <label for="ArtistId">Artist</label>
-            @* <input asp-for="@Model.ArtistId" type="number" class="form-control" name="ArtistId" placeholder="artist" /> *@
-            <select asp-for="ArtistId" asp-items="ViewBag.ArtistId" class="form-control"></select>
+            <select id="createInput" asp-for="ArtistId" asp-items="ViewBag.ArtistId" class="form-control"></select>
         </div>
         <div class="form-group">
             <label for="Genre">Genre</label>
-            <input type="text" class="form-control" name="Genre" placeholder="genre" />
+            <input id="createInput" type="text" class="form-control" name="Genre" placeholder="genre" />
         </div>
         <div class="form-group">
             <label for="Released">Released</label>
-            <input type="date" class="form-control" name="Released" placeholder="2024" />
+            <input id="createInput" type="date" class="form-control" name="Released" placeholder="2024" />
         </div>
-        <button type="submit" class="btn btn-primary btn-block mt-2">Create</button>
+        <button id="createButton" type="submit" class="btn btn-primary btn-block mt-2">Create</button>
     </form>
 </div>

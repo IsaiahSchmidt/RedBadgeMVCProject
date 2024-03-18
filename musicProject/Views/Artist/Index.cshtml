@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<musicProject.Models.ArtistModels.ArtistListItem>
 
-<h1 class="text-center">All Artists</h1>
-<a asp-action="Create" asp-controller="Artist" class="text-primary">Create An Artist</a>
-<table class="table table-striped table-dark">
+<div class="text-center">
+<h1>All Artists</h1>
+<a id="actions" asp-action="Create" asp-controller="Artist" class="text-primary">Create An Artist</a>
+</div>
+
+<table id="table">
     <thead>
         <tr>
             <th>Artist</th>
@@ -13,7 +16,6 @@
         @foreach (var artist in Model)
         {
             <tr>
-                @* <th><a asp-action="Detail" asp-controller="Artist" asp-route-name="@artist.Name">@artist.Name</a></th> *@
                 <td>@artist.Name</td>
                 <td><a asp-action="Detail" asp-controller="Artist" asp-route-name="@artist.Name">Details</a></td>
             </tr>

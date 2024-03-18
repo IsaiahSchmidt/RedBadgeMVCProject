@@ -12,11 +12,9 @@ namespace musicProject.Controllers
     {
         private IAlbumService _albumService;
         private IArtistService _artistService;
-        //private readonly ApplicationDbContext _context;
-        public AlbumController(IAlbumService albumService, /*ApplicationDbContext context,*/ IArtistService artistService)
+        public AlbumController(IAlbumService albumService, IArtistService artistService)
         {
             _albumService = albumService;
-            //_context = context;
             _artistService = artistService;
         }
 

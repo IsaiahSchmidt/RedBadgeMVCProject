@@ -9,9 +9,7 @@
     <ol>
         @foreach (var album in Model.Albums)
         {
-            <div>
-                @* <h3>@album.Title</h3> *@
-                @* <h3><a asp-action="Detail" asp-controller="Album" asp-route-id="@album.Id">@album.Title</a></h3> *@
+            <div id="detail">
                 <h3>@album.Title</h3>
                 <p>@album.Genre</p>
                 <p>@album.Released.Year</p>

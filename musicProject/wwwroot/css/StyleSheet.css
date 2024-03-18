@@ -1,0 +1,282 @@
+﻿body {
+    background: linear-gradient(99.6deg, rgb(112, 128, 152) 10.6%, rgb(242, 227, 234) 32.9%, rgb(234, 202, 213) 52.7%, rgb(220, 227, 239) 72.8%, rgb(185, 205, 227) 81.1%, rgb(154, 180, 212) 102.4%);
+    overflow: visible;
+    scroll-behavior: smooth;
+    height: auto;
+    padding-bottom: 64px;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    height: 48px;
+    margin: 0 auto;
+/*    background: linear-gradient(to bottom, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+*/    font-size: 18px;
+    color: black;
+    background-color: rgb(175, 196, 222);
+}
+
+
+#navBar {
+    background: linear-gradient(to top, #3f51b1 0%, #5a55ae 13%, #7b5fac 25%, #8f6aae 38%, #a86aa4 50%, #cc6b8e 62%, #f18271 75%, #f3a469 87%, #f7c978 100%);
+    font-size: 1.2em;
+    font: bold;
+    border-bottom: inset 3px purple;
+}
+
+#mlLogo{
+    height: 50px;
+    width: 50px;
+    margin: 3px;
+    border-radius: 50%;
+}
+
+h1 {
+    font-size: 3.5em;
+}
+
+table {
+    /*background-color: azure;*/
+    background: linear-gradient(99.6deg, rgb(112, 128, 152) 10.6%, rgb(242, 227, 234) 32.9%, rgb(234, 202, 213) 52.7%, rgb(220, 227, 239) 72.8%, rgb(185, 205, 227) 81.1%, rgb(154, 180, 212) 102.4%);
+    border: 5px inset purple;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    position: center;
+    font-size: 1.25em;
+    font-weight: 500;
+    color: black;
+}
+
+tbody {
+    /*background: linear-gradient(to top, #f6f3ff 0%, #cd9cf2 100%);*/
+}
+
+td {
+    border: groove 2px black;
+    padding: .25em;
+}
+
+th {
+    padding: .25em;
+    border: solid 2px black;
+}
+
+img{
+    margin: 10px;
+    width: 120px;
+    height: 120px;
+}
+
+.clear{
+    width: 100%;
+    height: 300px;
+
+}
+
+/* Home page */
+#WelcomePageH1 {
+    font-size: 56px;
+}
+
+#homePageRow1{
+    min-width: 100%;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+#homePageRow2 {
+    min-width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+#homePage1 {
+    width: 50%;
+    /*    height: 50%;
+*/ float: left;
+    border: solid 1px purple;
+    border-collapse: collapse;
+    display: block;
+}
+
+#homePage2 {
+    width: 50%;
+    /*    height: 50%;
+*/ float: right;
+    border: solid 1px purple;
+    border-collapse: collapse;
+    display: block;
+}
+
+#homePage3 {
+    width: 50%;
+    /*    height: 50%;
+*/ float: left;
+    border: solid 1px purple;
+    border-collapse: collapse;
+    display: block;
+}
+
+#homePage4 {
+    width: 50%;
+    /*    height: 50%;
+*/ float: right;
+    border: solid 1px purple;
+    border-collapse: collapse;
+    display: block;
+}
+
+
+
+#detail {
+    padding: .5em;
+    margin: 1em;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#reviewDetail {
+    padding: .5em;
+    margin: 1em;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+#reviewDetailTitle {
+    padding: .5em;
+    margin: .5em;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#reviewTitle{
+    font-size:1.5em;
+}
+
+#reviewArtist{
+    font-size:1.25em;
+}
+
+#actions {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+#actionsEdit {
+    margin: 0 0 0 8em;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+#actionsReview {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 1em;
+    color: black;
+}
+
+#create {
+    font-size: 2.5em;
+    position: center;
+    font-weight: 400;
+}
+
+
+#createInput {
+    color: black;
+    border: inset 5px mediumpurple;
+}
+
+#createButton {
+    background-color: #f29957;
+    margin: 1em 0, 0, 0;
+    position: relative;
+    border: inset 2px mediumpurple;
+    color: black;
+}
+
+#reviewButton {
+    background-color: #f29957;
+    color: black;
+    border: inset 5px mediumpurple;
+}
+
+#trackButton {
+    border: inset 2px mediumpurple;
+    background-color: #f29957;
+    color: black;
+}
+
+#albumCreateButton {
+    border: inset 2px mediumpurple;
+    border-collapse: collapse;
+    background-color: #f29957;
+    color: black;
+    padding: .25em;
+}
+
+#saveButton{
+    margin: 0.5em 0 0 0;
+}
+/*  <script> function search bars*/
+#trackTitle {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#trackArtist {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#trackAlbum {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#trackGenre {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#trackReleased {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#albumTitle {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#albumArtist {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#albumGenre {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#albumReleased {
+    color: black;
+    border: inset 2px mediumpurple;
+}
+
+#albumTitleR {
+    color: black;
+    border: inset 5px purple;
+    border-collapse:collapse;
+    margin: .25em 0 .01em 0;
+}
+#trackTitleR {
+    color: black;
+    border: inset 5px purple;
+    border-collapse: collapse;
+    margin: .25em 0 .01em 0;
+}

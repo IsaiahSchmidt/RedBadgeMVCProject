@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<musicProject.Models.AlbumModels.AlbumListItem>
 
-<h1>Album Reviews</h1>
+<h1 class="text-center">Album Reviews</h1>
 
-<a asp-action="Create" asp-controller="AlbumReview" class="text-primary">Review An Album</a> |
-<a asp-action="MyAlbumReviews" asp-controller="AlbumReview" class="text-primary">My Album Reviews</a>
-<input class="form-control" type="text" id="albumTitle" onkeyup="searchForAlbums()" placeholder="Search for Albums..">
+<div class="text-center" id="actions">
+    <a asp-action="Create" asp-controller="AlbumReview" class="text-primary">Review An Album</a> |
+    <a asp-action="MyAlbumReviews" asp-controller="AlbumReview" class="text-primary">My Album Reviews</a>
+</div>
+<input class="form-control" type="text" id="albumTitleR" onkeyup="searchForAlbums()" placeholder="Search for Albums..">
 
- <table id="albumsWithReviews" class="table table-striped table-dark">
+<table id="albumsWithReviews">
     <thead>
         <tr>
             <th>Album </th>
@@ -33,14 +35,14 @@
 <script>
     function searchForAlbums() {
         var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("albumTitle");
+        input = document.getElementById("albumTitleR");
         filter = input.value.toUpperCase();
         table = document.getElementById("albumsWithReviews");
         tr = table.getElementsByTagName("tr");
 
         // Loop through all table rows, and hide those that don't match the search query
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0]; 
+            td = tr[i].getElementsByTagName("td")[0];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

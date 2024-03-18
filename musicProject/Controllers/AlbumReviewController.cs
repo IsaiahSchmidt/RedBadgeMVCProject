@@ -11,12 +11,10 @@ namespace musicProject.Controllers
     {
         private IAlbumReviewService _albumReviewService;
         private IAlbumService _albumService;
-        //private readonly ApplicationDbContext _context;
-        public AlbumReviewController(IAlbumReviewService albumReviewService /*ApplicationDbContext context*/, IAlbumService albumService)
+        public AlbumReviewController(IAlbumReviewService albumReviewService, IAlbumService albumService)
         {
             _albumReviewService = albumReviewService;
             _albumService = albumService;
-            //_context = context;
         }
 
         [HttpGet]

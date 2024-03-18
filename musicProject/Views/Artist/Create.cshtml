@@ -2,10 +2,10 @@
 
 <div class="container">
     <form method="post" asp-action="Create">
-        <div class="form-group">
-            <label for="Name">Name</label>
-            <input asp-for="Name" class="form-control" name="Name" placeholder="Name" />
+        <div id="create" class="form-group">
+            <label for="Name">Artist Name</label>
+            <input id="createInput" asp-for="Name" class="form-control" name="Name" placeholder="Name" />
         </div>
-        <button type="submit" class="btn btn-primary btn-block mt-2">Create</button>
+        <button id="createButton" type="submit" class="btn btn-block ">Create</button>
     </form>
 </div>

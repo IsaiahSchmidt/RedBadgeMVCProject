@@ -203,7 +203,5 @@ namespace musicProject.Services.TrackServices
 
             return trackListItems.OrderBy(review => review.Rating).ToList();
         }
-
-
     }
 }

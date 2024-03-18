@@ -40,9 +40,6 @@ namespace musicProject.Services.AlbumReviewServices
             await _context.SaveChangesAsync();
             return true;
         }
-
-
-
         public async Task<bool> DeleteAlbumReviewAsync(int id)
         {
             ProcessUserInfo();
@@ -91,17 +88,6 @@ namespace musicProject.Services.AlbumReviewServices
                         UserName = entity.User.UserName
                     }
                 }).ToListAsync();
-            //foreach (var review in reviewsByAlbum)
-            //{
-            //    AlbumReviewDetail detail = new()
-            //    {
-            //        Id = review.Id,
-            //        Rating = review.Rating,
-            //        Content = review.Content,
-            //        UserId = review.UserId,
-            //    };
-            //    reviews.Add(detail);
-            //}
             return reviewsByAlbum;
         }       
         
@@ -159,7 +145,6 @@ namespace musicProject.Services.AlbumReviewServices
         {
             var review = await _context.AlbumReviews
                 .Include(r => r.User).Include(a => a.Album).ThenInclude(a => a.Artist)
-                //.Where(r => r.UserId == _userId)
                 .FirstOrDefaultAsync(n => n.Id == id);
             if (review is null) return null;
             return new AlbumReviewDetail()

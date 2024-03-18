@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<musicProject.Models.AlbumModels.AlbumListItem>
 
-<h1 class="text-center">All Albums</h1>
-<a asp-action="Create" asp-controller="Album" class="text-primary">Create An Album</a>
-@* <input class="form-control" type="text" id="albumTitle" onkeyup="searchForAlbums()" placeholder="Search for Albums.."> *@
+<div class="text-center">
+    <h1>All Albums</h1>
+    <a id="actions" asp-action="Create" asp-controller="Album">Create An Album</a>
+</div>
 
-<table id="albums" class="table table-striped table-dark">
+<table id="albums">
     <thead>
         <tr>
             <th>
@@ -23,23 +24,17 @@
                 Released
                 <input class="form-control" type="number" id="albumReleased" onkeyup="searchForReleased()" placeholder="Search for Release Date..">
             </th>
-@*             <th>
-                @* Review *@
-@*                 &nbsp;  
-            </th> *@ 
         </tr>
     </thead>
     <tbody>
         @foreach (var album in Model)
         {
             <tr>
-                @* <td><a asp-action="DetailByName" asp-route-name="@album.Title">@album.Title</a></td> *@
-                <td><a asp-action="Detail" asp-route-id="@album.Id">@album.Title</a></td>
-                <td><a asp-action="Detail" asp-controller="Artist" asp-route-name="@album.Artist.Name">@album.Artist.Name</a></td>
+                <td>@album.Title - <a asp-action="Detail" asp-route-id="@album.Id">Details</a></td>
+                <td>@album.Artist.Name - <a asp-action="Detail" asp-controller="Artist" asp-route-name="@album.Artist.Name">Details</a></td>
                 <td>@album.Genre</td>
                 <td>@album.Released.Year</td>
-@*                 <td><a asp-action="Review" asp-controller="AlbumReview" asp-route-id="@album.Id">Review</a></td>
- *@            </tr>
+            </tr>
         }
     </tbody>
 </table>

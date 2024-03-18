@@ -1,8 +1,43 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<html lang="en">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<body>
+    <div class="text-center">
+        <h1 id="WelcomePageH1">MusicLovers</h1>
+        <p>Welcome all music lovers! This is your hub for all things music! Share your thoughts on albums and tracks with others, and discover what others have to say about your favorite music. </p>
+    </div>
+    <div id="homePageRow1" class="container">
+        <a asp-action="Index" asp-controller="Artist">
+            <div class="text-center" id="homePage1">
+                <img src="./Images/Tame-Impala.jpg" alt="could not load image" />
+                <p>Check out your favorite artist's discography here</p>
+            </div>
+        </a>
+        <a asp-action="Index" asp-controller="Album">
+            <div class="text-center" id="homePage2">
+                <img src="./Images/TheFragile.jpg" alt="could not load image" />
+                <p>Check out your favorite albums here </p>
+            </div>
+        </a>
+    </div>
+    <div id="homePageRow2" class="container">
+        <a asp-action="NewIndex" asp-controller="AlbumReview">
+            <div class="text-center" id="homePage3">
+                <img src="./Images/psychedelicguitar.jpg" alt="could not load image" />
+                <p>Review your favorite albums here</p>
+            </div>
+        </a>
+        <a asp-action="NewIndex" asp-controller="TrackReview">
+            <div class="text-center" id="homePage4">
+                <img src="./Images/drums.jpg" alt="could not load image" />
+                <p>Review your favorite tracks here</p>
+            </div>
+        </a>
+    </div>
+    <div class="clear"></div>
+
+</body>
+
+</html>

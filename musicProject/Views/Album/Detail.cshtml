@@ -2,19 +2,22 @@
 <form>
     <input asp-for="@Model.Id" hidden />
 </form>
-
-<h1>@Model.Title</h1>
-<h2>@Model.Artist.Name</h2>
 <body>
-    <p>@Model.Genre</p>
-    <p>@Model.Released.Year</p>
-    <ol>
-        @foreach (var track in Model.Tracks)
-        {
-            <li>@track.Title</li>
-        }
-    </ol>
-    <a asp-action="Index" asp-controller="Album">Back To Albums</a> |
-    <a asp-action="Index" asp-controller="Artist">Back To Artists</a> |
-    <a asp-action="Detail" asp-controller="Artist" asp-route-name="@Model.Artist.Name">Back to <i>@Model.Artist.Name</i> Detail</a>
+    <div id="detail">
+        <h1>@Model.Title</h1>
+        <h2>@Model.Artist.Name</h2>
+        <p>@Model.Genre</p>
+        <p>@Model.Released.Year</p>
+        <ol>
+            @foreach (var track in Model.Tracks)
+            {
+                <li>@track.Title</li>
+            }
+        </ol>
+    </div>
+    <div id="actions">
+        <a asp-action="Index" asp-controller="Album">Back To Albums</a> |
+        <a asp-action="Index" asp-controller="Artist">Back To Artists</a> |
+        <a asp-action="Detail" asp-controller="Artist" asp-route-name="@Model.Artist.Name">Back to <i>@Model.Artist.Name</i> Detail</a>
+    </div>
 </body>

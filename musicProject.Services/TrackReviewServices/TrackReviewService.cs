@@ -71,16 +71,6 @@ namespace musicProject.Services.TrackReviewServices
                         UserName = entity.User.UserName
                     }
                 }).ToListAsync();
-            //foreach (var review in reviewsByTrack)
-            //{
-            //    TrackReviewDetail detail = new()
-            //    {
-            //        Rating = review.Rating,
-            //        Content = review.Content,
-            //        UserId = review.UserId
-            //    };
-            //    reviews.Add(detail);
-            //}
             return reviewsByTrack;
         }
 
@@ -101,17 +91,6 @@ namespace musicProject.Services.TrackReviewServices
                         UserName = entity.User.UserName
                     }
                 }).ToListAsync();
-            //foreach (var review in reviewsByTrack)
-            //{
-            //    TrackReviewDetail detail = new()
-            //    {
-            //        Id= review.Id,
-            //        Rating = review.Rating,
-            //        Content = review.Content,
-            //        UserId = review.UserId
-            //    };
-            //    reviews.Add(detail);
-            //}
             return reviewsByTrack;
         }
 
@@ -136,7 +115,7 @@ namespace musicProject.Services.TrackReviewServices
             var review = await _context.TrackReviews.Where(r => r.UserId == _userId)
                 .FirstOrDefaultAsync(n => n.Id == reviewUpdate.Id);
             if (review is null) return false;
-            if (review.UserId != _userId) return false; /*exception: reference not set to instance of an object review.user.id*/
+            if (review.UserId != _userId) return false;
             review.Rating = reviewUpdate.Rating;
             review.Content = reviewUpdate.Content;
 
@@ -148,7 +127,6 @@ namespace musicProject.Services.TrackReviewServices
         {
             var review = await _context.TrackReviews
                 .Include(u => u.User).Include(t => t.Track).ThenInclude(a => a.Album).ThenInclude(a => a.Artist)
-                //.Where(r => r.UserId == _userId)
                 .FirstOrDefaultAsync(n => n.Id == id);
             if (review is null) return null;
             return new TrackReviewDetail()
@@ -239,39 +217,6 @@ namespace musicProject.Services.TrackReviewServices
                 }).OrderByDescending(r => r.Rating).ToListAsync()
             };
         }
-
-        //TrackWithReviews trackReviews = await _context.Tracks.Where(t => t.Id == trackId)
-        //    .Include(t => t.Album).Include(a => a.Artist).Select(entity => new TrackWithReviews
-        //    {
-        //        Id = entity.Id,
-        //        Title = entity.Title,
-        //        Album = new AlbumListItem
-        //        {
-        //            Id = entity.Album.Id,
-        //            Title = entity.Album.Title,
-        //            Artist = new ArtistListItem
-        //            {
-        //                Id = entity.Artist.Id,
-        //                Name = entity.Artist.Name,
-        //            },
-        //            Genre = entity.Album.Genre,
-        //            Released = entity.Album.Released,
-        //        },
-        //        TrackReviews = _context.TrackReviews.Where(r => r.TrackId == trackId).Select(review => new TrackReviewListItem
-        //        {
-        //            Id = review.Id,
-        //            Rating = review.Rating,
-        //            User = new UserListItem
-        //            {
-        //                Id = review.User.Id,
-        //                UserName = review.User.UserName
-        //            }
-        //        }).OrderByDescending(r=>r.Rating).ToList()
-        //    })
-
-        //return trackReviews;
-
-
         private void ProcessUserInfo()
         {
             var claims = _contextAccessor.HttpContext!.User.Identity as ClaimsIdentity;

@@ -31,12 +31,6 @@ namespace musicProject.Controllers
             ViewData["TrackId"] = new SelectList(await _trackService.GetAllTracksAsync(), "Id", "Title");
 
             TrackReviewCreate reviewCreate = new TrackReviewCreate();
-            //var trackSelection = _trackService.GetAllTracksAsync().Result.Select(t=>new SelectListItem
-            //{
-            //    Text = t.Title,
-            //    Value = t.Id.ToString(),
-            //}).ToList();
-            //reviewCreate.TrackSelection = trackSelection;
             return View(reviewCreate);
         }
 
