@@ -76,7 +76,6 @@ namespace musicProject.Services.TrackReviewServices
 
         public async Task<IEnumerable<TrackReviewListItem>> GetReviewsByTrackArtistAsync(string artistName)
         {
-            //List<TrackReviewDetail> reviews = new List<TrackReviewDetail>();
             List<TrackReviewListItem> reviewsByTrack = await _context.TrackReviews
                 .Include(t => t.Track).ThenInclude(a => a.Artist).Include(u => u.User)
                 .Where(r => r.Track.Artist.Name == artistName).Select(entity => new TrackReviewListItem

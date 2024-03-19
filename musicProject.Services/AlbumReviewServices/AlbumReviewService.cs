@@ -124,7 +124,8 @@ namespace musicProject.Services.AlbumReviewServices
             //        }
             //    };
             //    reviews.Add(detail);
-            //} this is unnecessary - code above already does this
+            //}
+            //this is unnecessary - code above already does this
             return reviewsByArtist;
         }
 
